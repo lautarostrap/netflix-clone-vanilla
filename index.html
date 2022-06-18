@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel="stylesheet" href="./styles/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100;200;300;400;700&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap"
+        rel="stylesheet"
+    >
+</head>
+<body>
+    <header>
+        <div class="header__profile-selection inactive">
+            <div class="header--image-container">
+                <img src="./assets/images/netflix-isologo.png" alt="Netflix">
+            </div>
+        </div>
+        <div class="header__home inactive">
+            <div class="navbar-top">
+                <div class="logo-container">
+                    <img
+                        src="./assets/images/netflix-nlogo.png"
+                        alt="Netflix"
+                    >
+                </div>
+                <div  class="profile-container">
+                    <img
+                        src="./assets/html-version/rick.jpeg"
+                        alt="Profile"
+                    >
+                </div>
+            </div>
+            <div class="navbar-bottom">
+                <ul class="link-container">
+                    <li>Series</li>
+                    <li>Movies</li>
+                    <li>Categories <span></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="header__not-found inactive">
+            <img src="./assets/images/netflix-isologo.png" alt="">
+        </div>
+        <div class="header__movie-detail inactive">
+            <span class="header__left"></span>
+            <div class="header__right">
+                <span class="header--search"></span>
+                <div  class="header--profile-container">
+                    <img
+                        src="./assets/html-version/rick.jpeg"
+                        alt="Profile"
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="header__more inactive">
+            <span></span>
+            <h2>Profiles & More</h2>
+        </div>
+        <div class="header__movies-series">
+            <div class="navbar-top">
+                <div class="navbar-left">
+                    <span></span>
+                    <h2>Movies</h2>
+                </div>
+                <div  class="profile-container">
+                    <span></span>
+                    <img
+                        src="./assets/html-version/rick.jpeg"
+                        alt="Profile"
+                    >
+                </div>
+            </div>
+            <div class="navbar-bottom">
+                <button class="modal--movie-serie">Movies<span class="dropdown-icon"></span></button>
+                <button class="modal--categories">All categories<span class="dropdown-icon"></span></button>
+            </div>
+        </div>
+    </header>
+
+    <article class="hero-movie">
+        <div class="hero-movie__content-container">
+            <ul class="hero-movie__description-container">
+                <li class="description--first">Disturbing</li>
+                <li>Nostalgic</li>
+                <li>Horror</li>
+                <li>Prominent Soundtrack</li>
+            </ul>
+            <div class="hero-movie__buttons-container">
+                <button class="buttons--my-list buttons__no-decoration">
+                    <p>+</p>
+                    My list
+                </button>
+                <button class="buttons--play"><span></span>Play</button>
+                <button class="buttons--info buttons__no-decoration">
+                    <span></span>
+                    Info
+                </button>
+            </div>
+        </div>
+
+    </article>
+
+    <section class="genre-movies__main-container">
+        <h2 class="genre-movies__title">Top TV</h2>
+        <div class="genre-movies__scroll-container">
+            <article class="movie__image">
+                <img
+                    src="../assets/html-version/stranger-poster-v300.jpeg"
+                    alt="movie name"
+                >
+            </article>
+            <article class="movie__image">
+                <img
+                    src="../assets/html-version/msmarvel-poster-v300.jpeg"
+                    alt="movie name"
+                >
+            </article>
+            <article class="movie__image">
+                <img
+                    src="../assets/html-version/obiwan-poster-v300.jpeg"
+                    alt="movie name"
+                >
+            </article>
+            <article class="movie__image">
+                <img
+                    src="../assets/html-version/theboys-poster-v300.jpeg"
+                    alt="movie name"
+                >
+            </article>
+        </div>
+    </section>
+
+    <section class="top-movies__main-container">
+        <h2 class="top-movies__title">Top 10 TV Shows</h2>
+        <div class="top-movies__scroll-container">
+            <article class="top__image topContent--first">
+                <p>1</p>
+                <img
+                    src="../assets/html-version/stranger-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--second">
+                <p>2</p>
+                <img
+                    src="../assets/html-version/msmarvel-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--third">
+                <p>3</p>
+                <img
+                    src="../assets/html-version/obiwan-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--fourth">
+                <p>4</p>
+                <img
+                    src="../assets/html-version/theboys-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--fifth">
+                <p>5</p>
+                <img
+                    src="../assets/html-version/stranger-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--sixth">
+                <p>6</p>
+                <img
+                    src="../assets/html-version/msmarvel-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--seventh">
+                <p>7</p>
+                <img
+                    src="../assets/html-version/obiwan-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--eighth">
+                <p>8</p>
+                <img
+                    src="../assets/html-version/theboys-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--ninth">
+                <p>9</p>
+                <img
+                    src="../assets/html-version/stranger-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+            <article class="top__image topContent--tenth">
+                <p>10</p>
+                <img
+                    src="../assets/html-version/msmarvel-poster-v300.jpeg"
+                    alt="top name"
+                >
+            </article>
+        </div>
+    </section>
+
+    <section class="not-found__main-container inactive">
+        <h1 class="not-found__title text-shadow">Lost your way?</h1>
+        <p class="not-found__description text-shadow">Sorry, we can't find that page. You'll find loads to explore on the home page.</p>
+        <button class="not-found__button">Netflix Home</button>
+        <p class="not-found__error text-shadow">Error Code <strong>NSES-404</strong></p>
+        <p class="not-found__movie-image-title">FROM <strong>LOST IN SPACE</strong></p>
+    </section class="">
+
+    <nav class="more__main-container inactive">
+        <ul class="main--profiles-container">
+            <li>
+                <div class="main--profile">
+                    <a href="">
+                        <div class="main--image-container">
+                            <img
+                            src="../assets/html-version/rick.jpeg"
+                            alt="Profile 1"
+                            >
+                        </div>
+                        <p>Rick Sanchez</p>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="main--profile">
+                    <a href="">
+                        <div class="main--image-container">
+                            <img
+                            src="../assets/html-version/morty.jpeg"
+                            alt="Profile 2"
+                            >
+                        </div>
+                        <p>Morty Smith</p>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="main--profile">
+                    <a href="">
+                        <div class="main--image-container">
+                            <img
+                            src="../assets/html-version/summer.jpeg"
+                            alt="Profile 3"
+                            >
+                        </div>
+                        <p>Summer Smith</p>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="main--profile">
+                    <a href="">
+                        <div class="main--image-container">
+                            <img
+                            src="../assets/html-version/beth.jpeg"
+                            alt="Profile 4"
+                            >
+                        </div>
+                        <p>Beth Smith</p>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="main--profile">
+                    <a href="">
+                        <div class="main--image-container">
+                            <img
+                            src="../assets/html-version/jerry.jpeg"
+                            alt="Profile 5"
+                            >
+                        </div>
+                        <p>Jerry Smith</p>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <ul class="main--links-container">
+            <li class="links__first"><span></span>My list</li>
+            <li>Settings App</li>
+            <li>Account</li>
+            <li>Help</li>
+            <li>Log out</li>
+        </ul>
+    </nav>
+
+    <section class="main--routes-container inactive">    
+            <h1>Who's watching?</h1>
+            <ul class="main--profiles-container">
+                <li>
+                    <div class="main--profile">
+                        <a href="">
+                            <div class="main--image-container">
+                                <img
+                                src="../assets/html-version/rick.jpeg"
+                                alt="Profile 1"
+                                >
+                            </div>
+                            <p>Rick Sanchez</p>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="main--profile">
+                        <a href="">
+                            <div class="main--image-container">
+                                <img
+                                src="../assets/html-version/morty.jpeg"
+                                alt="Profile 2"
+                                >
+                            </div>
+                            <p>Morty Smith</p>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="main--profile">
+                        <a href="">
+                            <div class="main--image-container">
+                                <img
+                                src="../assets/html-version/summer.jpeg"
+                                alt="Profile 3"
+                                >
+                            </div>
+                            <p>Summer Smith</p>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="main--profile">
+                        <a href="">
+                            <div class="main--image-container">
+                                <img
+                                src="../assets/html-version/beth.jpeg"
+                                alt="Profile 4"
+                                >
+                            </div>
+                            <p>Beth Smith</p>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="main--profile">
+                        <a href="">
+                            <div class="main--image-container">
+                                <img
+                                src="../assets/html-version/jerry.jpeg"
+                                alt="Profile 5"
+                                >
+                            </div>
+                            <p>Jerry Smith</p>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+    </section>     
+
+    <article class="movie-detail__main-container inactive">
+        <div class="movie__image-container">
+            <p>Trailer not available</p>
+        </div>
+        <h2 class="movie__title">The Boys</h2>
+        <ul class="movie__features">
+            <li>2022</li>
+            <li class="features--age">18+</li>
+            <li>3 seasons</li>
+        </ul>
+        <div class="primary-buttons__container">
+            <button class="movie__button watch"><span></span>Watch</button>
+            <button class="movie__button download"><span></span>Download</button>
+        </div>
+        <p class="movie__description overview">
+            A group of vigilantes known informally as “The Boys” set
+             out to take down corrupt superheroes with no more than 
+             blue-collar grit and a willingness to fight dirty.
+        </p>
+        <p class="movie__description starring">
+            <strong>Starring:</strong> Karl Urban, Jack Quaid, Antony Starr
+        </p>
+        <p class="movie__description direction">
+            <strong>Direction:</strong> Eric Kripke
+        </p>
+        <div class="secondary-buttons__container">
+            <button>
+                <div class="button--my-list">
+                    <p>+</p>
+                </div>
+                My list
+            </button>
+            <button>
+                <div class="button--rate">
+                    <p>♡</p>
+                </div>
+                Rate
+            </button>
+            <button>
+                <div class="button--share">
+                    <span></span>
+                </div>
+                Share
+            </button>
+            <button>
+                <div class="button--download">
+                    <span></span>
+                </div>
+                Download
+            </button>
+        </div>
+    </article>
+
+    <article class="movie-preview__main-container inactive">
+        <div class="movie__image">
+            <img
+                src="./assets/html-version/stranger-poster-v300.jpeg"
+                alt="movie name"
+            >
+        </div>
+        <div class="movie__info">
+            <h3 class="movie__info--title">
+                Stranger Things
+            </h3>
+            <ul class="movie__info--features">
+                <li>2022</li>
+                <li>16+</li>
+                <li>4 seasons</li>
+            </ul>
+            <p class="movie__info--description">
+                When a young boy vanishes, a small town uncovers 
+                a mystery involving secret experiments, terrifying 
+                supernatural forces, and one strange little girl.
+            </p>
+        </div>
+        <div class="movie__close">
+            <img src="../assets/icons/close-icon.png" alt="close">
+        </div>
+        <div class="buttons-container">
+            <div class="movie__buttons">
+                <div class="buttons--play">
+                    <button><span></span></button>
+                    <p>Play</p>
+                </div>
+                <div class="buttons--download">
+                    <button><span></span></button>
+                    <p>Download</p>
+                </div>
+                <div class="buttons--list">
+                    <button>+</button>
+                    <p>My list</p>
+                </div>
+                <div class="buttons--share">
+                    <button><span></span></button>
+                    <p>Share</p>
+                </div>
+            </div>
+            <button class="movie__more">
+                <div class="more__container">
+                    <div>
+                        <span class="more--left-icon"></span>
+                        <p>Episodes & more</p>
+                    </div>
+                    <span class="more--right-icon"></span>
+                </div>
+            </button>
+        </div>
+    </article>
+
+    <footer class="inactive">
+        <ul class="footer-container">
+            <li class="footer-item-container">
+                <img src="../assets/icons/home-white.png" alt="Home">
+                <span>Home</span>
+            </li>
+            <li class="footer-item-container">
+                <img src="../assets/icons/games-white.png" alt="Games">
+                <span>Games</span>
+            </li>
+            <li class="footer-item-container">
+                <img src="../assets/icons/soon-white.png" alt="Coming soon">
+                <span>Coming soon</span>
+            </li>
+            <li class="footer-item-container">
+                <img src="../assets/icons/download-white.png" alt="Downloads">
+                <span>Downloads</span>
+            </li>
+        </ul>
+    </footer>
+
+</body>
+</html>

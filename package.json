@@ -1,0 +1,22 @@
+{
+  "name": "netflix-clone-vanilla",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lautistr/netflix-clone-vanilla.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lautistr/netflix-clone-vanilla/issues"
+  },
+  "homepage": "https://github.com/lautistr/netflix-clone-vanilla#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
