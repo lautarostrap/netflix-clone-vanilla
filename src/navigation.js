@@ -123,3 +123,29 @@ function categoriesPage() {
     console.log('Categories!')
 }
 
+    // Buttons
+// Functions
+
+const toggleInactive = (node) => {
+    node.classList.toggle('inactive');
+}
+
+//Listeners
+
+moreButton.forEach(button => button.addEventListener('click', () => {
+    location.hash = '#config';
+  }));
+
+backButton.forEach(button => button.addEventListener('click', () => {
+    const stateLoad = window.history.state ? window.history.state.loadUrl : '';
+    if (stateLoad.includes('#')) {
+        window.location.hash = '';
+    } else {
+        window.history.back();
+    }
+}));
+
+closeButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    toggleInactive(moviePreviewModal)
+});
