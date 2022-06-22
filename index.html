@@ -19,7 +19,7 @@
 </head>
 <body>
     <header>
-        <div class="header__profile-selection inactive">
+        <div class="header__profile-selection">
             <div class="header--image-container">
                 <img src="./assets/images/netflix-isologo.png" alt="Netflix">
             </div>
@@ -33,7 +33,9 @@
                     >
                 </div>
                 <div  class="profile-container">
+                    <span class="header--search"></span>
                     <img
+                        class="profile__more-button"
                         src="./assets/html-version/rick.jpeg"
                         alt="Profile"
                     >
@@ -51,11 +53,12 @@
             <img src="./assets/images/netflix-isologo.png" alt="">
         </div>
         <div class="header__movie-detail inactive">
-            <span class="header__left"></span>
+            <span class="header__left back--button"></span>
             <div class="header__right">
                 <span class="header--search"></span>
                 <div  class="header--profile-container">
                     <img
+                        class="profile__more-button"
                         src="./assets/html-version/rick.jpeg"
                         alt="Profile"
                     >
@@ -63,18 +66,19 @@
             </div>
         </div>
         <div class="header__more inactive">
-            <span></span>
+            <span class="back--button"></span>
             <h2>Profiles & More</h2>
         </div>
-        <div class="header__movies-series">
+        <div class="header__movies-series inactive">
             <div class="navbar-top">
                 <div class="navbar-left">
-                    <span></span>
+                    <span id="back--button"></span>
                     <h2>Movies</h2>
                 </div>
                 <div  class="profile-container">
                     <span></span>
                     <img
+                        id="profile__more-button"
                         src="./assets/html-version/rick.jpeg"
                         alt="Profile"
                     >
@@ -87,7 +91,7 @@
         </div>
     </header>
 
-    <article class="hero-movie">
+    <article class="hero-movie inactive">
         <div class="hero-movie__content-container">
             <ul class="hero-movie__description-container">
                 <li class="description--first">Disturbing</li>
@@ -110,7 +114,9 @@
 
     </article>
 
-    <section class="genre-movies__main-container">
+    <section class="home__vScrollContainer"></section>
+
+    <section class="genre-movies__main-container inactive">
         <h2 class="genre-movies__title">Top TV</h2>
         <div class="genre-movies__scroll-container">
             <article class="movie__image">
@@ -140,73 +146,73 @@
         </div>
     </section>
 
-    <section class="top-movies__main-container">
+    <!-- <section class="top-movies__main-container inactive">
         <h2 class="top-movies__title">Top 10 TV Shows</h2>
         <div class="top-movies__scroll-container">
-            <article class="top__image topContent--first">
+            <article class="top__image topContent--1">
                 <p>1</p>
                 <img
                     src="../assets/html-version/stranger-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--second">
+            <article class="top__image topContent--2">
                 <p>2</p>
                 <img
                     src="../assets/html-version/msmarvel-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--third">
+            <article class="top__image topContent--3">
                 <p>3</p>
                 <img
                     src="../assets/html-version/obiwan-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--fourth">
+            <article class="top__image topContent--4">
                 <p>4</p>
                 <img
                     src="../assets/html-version/theboys-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--fifth">
+            <article class="top__image topContent--5">
                 <p>5</p>
                 <img
                     src="../assets/html-version/stranger-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--sixth">
+            <article class="top__image topContent--6">
                 <p>6</p>
                 <img
                     src="../assets/html-version/msmarvel-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--seventh">
+            <article class="top__image topContent--7">
                 <p>7</p>
                 <img
                     src="../assets/html-version/obiwan-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--eighth">
+            <article class="top__image topContent--8">
                 <p>8</p>
                 <img
                     src="../assets/html-version/theboys-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--ninth">
+            <article class="top__image topContent--9">
                 <p>9</p>
                 <img
                     src="../assets/html-version/stranger-poster-v300.jpeg"
                     alt="top name"
                 >
             </article>
-            <article class="top__image topContent--tenth">
+            <article class="top__image topContent--10">
                 <p>10</p>
                 <img
                     src="../assets/html-version/msmarvel-poster-v300.jpeg"
@@ -214,7 +220,7 @@
                 >
             </article>
         </div>
-    </section>
+    </section> -->
 
     <section class="not-found__main-container inactive">
         <h1 class="not-found__title text-shadow">Lost your way?</h1>
@@ -222,7 +228,7 @@
         <button class="not-found__button">Netflix Home</button>
         <p class="not-found__error text-shadow">Error Code <strong>NSES-404</strong></p>
         <p class="not-found__movie-image-title">FROM <strong>LOST IN SPACE</strong></p>
-    </section class="">
+    </section>
 
     <nav class="more__main-container inactive">
         <ul class="main--profiles-container">
@@ -301,7 +307,7 @@
         </ul>
     </nav>
 
-    <section class="main--routes-container inactive">    
+    <section class="main--routes-container">    
             <h1>Who's watching?</h1>
             <ul class="main--profiles-container">
                 <li>
@@ -426,7 +432,7 @@
     </article>
 
     <article class="movie-preview__main-container inactive">
-        <div class="movie__image">
+        <div class="movie-preview__image">
             <img
                 src="./assets/html-version/stranger-poster-v300.jpeg"
                 alt="movie name"
@@ -437,9 +443,9 @@
                 Stranger Things
             </h3>
             <ul class="movie__info--features">
-                <li>2022</li>
-                <li>16+</li>
-                <li>4 seasons</li>
+                <li class="info--release">2022</li>
+                <!-- <li>16+</li> -->
+                <li class="info--lasts">4 seasons</li>
             </ul>
             <p class="movie__info--description">
                 When a young boy vanishes, a small town uncovers 
@@ -481,7 +487,7 @@
         </div>
     </article>
 
-    <footer class="inactive">
+    <footer class="footer inactive">
         <ul class="footer-container">
             <li class="footer-item-container">
                 <img src="../assets/icons/home-white.png" alt="Home">
@@ -502,5 +508,10 @@
         </ul>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./src/secrets.js"></script>
+    <script src="./src/nodes.js"></script>
+    <script src="./src/main.js"></script>
+    <script src="./src/navigation.js"></script>
 </body>
 </html>
