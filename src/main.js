@@ -74,9 +74,7 @@ const printContentHero = async (contentHero, contentType) => {
         rgba(0, 0, 0, 0.100) 60%,
         rgba(0, 0, 0)), 
         url(${contentImgUrl}`;
-    heroContainer.addEventListener('click', () => {
-            location.hash = `#movie=${contentHero.id}`;
-        });
+    heroContainer.addEventListener('click', () => {printContentPreview(contentType, contentHero.id)});
 
     getMovieDetails(contentType, contentHero.id)
         .then(content => {
@@ -102,7 +100,7 @@ const printContentPreview = async (contentType, contentId) => {
 
             moviePreviewModal.classList.remove('inactive');
             moviePreviewModal.addEventListener('click', () => {
-                location.hash = `#movie=${content.id}`;
+                location.hash = `#${contentType}=${content.id}`;
             });
         
             contentImageContainer.innerHTML = "";
@@ -149,12 +147,70 @@ const printContentPreview = async (contentType, contentId) => {
         })
 }
 
+const printContentDetails = async (contentType, contentId) => {
+    getMovieDetails(contentType, contentId)
+        .then(content => {
+            const contentImgUrl = `${POSTER_500W_URL}${content.backdrop_path}`;
+            contentDetailsImageContainer.style.backgroundImage = `url(${contentImgUrl}`;
+
+            contentDetailsTitle.textContent = 
+                (contentType === 'tv')
+                    ? content.name       
+                    : content.title;
+            contentDetailsDescription.textContent = content.overview;
+
+            const contentYear = 
+                (contentType === 'tv')
+                    ? content.last_air_date.slice(0, 4)       
+                    : content.release_date.slice(0, 4);
+            const contentLasts = 
+                (contentType === 'tv')
+                    ? `${content.number_of_seasons} season/s`
+                    : getMovieRuntime(content.runtime);
+            console.log(contentLasts);
+
+            contentDetailsFeatures.innerHTML = "";
+            const contentYearText = document.createTextNode(contentYear);
+            const contentLastsText = document.createTextNode(contentLasts);
+            
+            const contentYearItem = document.createElement('li');
+            const contentLastsItem = document.createElement('li');
+
+            contentYearItem.appendChild(contentYearText);
+            contentLastsItem.appendChild(contentLastsText);
+            contentDetailsFeatures.appendChild(contentYearItem);
+            contentDetailsFeatures.appendChild(contentLastsItem);
+        });
+    getMovieDetails(contentType, contentId, '/credits')
+        .then(extraInfo => {
+            contentDetailsStarring.textContent = `${extraInfo.cast[0].name}, ${extraInfo.cast[1].name}, ${extraInfo.cast[2].name}` ;
+
+            (contentType === 'tv')
+                ? contentDetailsDirectingTitle.textContent = 'Created by: '
+                : contentDetailsDirectingTitle.textContent = 'Direction: ';
+
+            const findCrew = (department) => {
+                const directing = extraInfo.crew.find(content => content.known_for_department === department)
+                return directing;
+            }
+
+            const directing = 
+                (contentType === 'tv')
+                    ? findCrew('Writing')
+                    : findCrew('Directing');
+
+            console.log(directing.name);
+            contentDetailsDirectingText.textContent = `${directing.name}`;
+
+        });
+}
+
 // API
 
-const getMovieDetails = async (contentType, contentId) => {
+const getMovieDetails = async (contentType, contentId, extraInfo) => {
 
     try {
-        let res = await api(`/${contentType}/${contentId}`);
+        let res = await api(`/${contentType}/${contentId}${extraInfo}`);
          return new Promise((resolve) => {resolve(res.data)});
      }
      catch (err) {
@@ -174,6 +230,7 @@ const getTopContentPreview = async (contentType) => {
 const getContentHero = async () => {
     
     let randomNumber = Math.random();
+    let randomNumber2 = Math.random();
     
     let randomContentType;
     (randomNumber < 0.5) 
@@ -187,9 +244,12 @@ const getContentHero = async () => {
         },
     });
 
-    let randomPoster = Math.floor(randomNumber * 10);
-    const contentHero = data.results[randomPoster];
-
+    let randomPoster = Math.floor(randomNumber2 * 10);
+    const contentHero =
+        (data.results[randomPoster])
+            ? data.results[randomPoster]
+            : data.results[randomPoster+1];
+    
     printContentHero(contentHero, randomContentType);
 }
 

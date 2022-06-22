@@ -759,6 +759,12 @@ article .overview {
     color: var(--white);
 }
 
+.movie__description strong, 
+.starring p, 
+.direction p {
+    display: inline;
+}
+
 .secondary-buttons__container {
     margin-top: 8px;
     display: flex;

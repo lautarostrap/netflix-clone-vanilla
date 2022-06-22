@@ -1,4 +1,9 @@
 const $ = (id) => document.querySelector(id);
+const selectorToString = (selector) => {
+    const nodeList = document.querySelectorAll(selector);
+    const stringedSelector = [...nodeList];
+    return stringedSelector;
+}
 
 // Sections
 
@@ -14,6 +19,9 @@ const notFoundHeader = $('.header__not-found');
 const movieDetailHeader = $('.header__movie-detail');
 const configHeader = $('.header__more');
 const moviesSeriesHeader = $('.header__movies-series');
+
+const contentDetailsImageContainer = $('.movie__image-container');
+const contentDetailsFeatures = $('.movie__features');
 
 const footer = $('.footer')
 
@@ -32,17 +40,23 @@ const contentInfoTitle = $('.movie__info--title');
 const contentInfoFeatures = $('.movie__info--features');
 const contentInfoDescription = $('.movie__info--description');
 
-const contentInfoRelease = $('info--release');
-const contentInfoLasts = $('info--lasts');
+const contentInfoRelease = $('.info--release');
+const contentInfoLasts = $('.info--lasts');
 
 const movieDescriptionContainer = $('.hero-movie__description-container')
 
 // Elements
 
 const topTitle = $('.top-movies__title');
+const contentDetailsTitle = $('.movie__title');
+const contentDetailsDescription = $('.overview');
+const contentDetailsStarring = $('.starring p');
+const contentDetailsDirectingText = $('.direction p');
+const contentDetailsDirectingTitle = $('.direction strong');
 
-const moreButton = $('.profile__more-button');
-const backButton = $('.back--button');
+const moreButton = selectorToString('.profile__more-button');
+const backButton = selectorToString('.back--button');
+const closeButton = $('.movie__close');
 
 // Modals
 

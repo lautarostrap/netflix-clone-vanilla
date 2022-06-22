@@ -14,7 +14,7 @@ function navigator() {
     ? configPage()       :
     location.hash.startsWith('#search=')
     ? searchPage()       :
-    location.hash.startsWith('#movie=')
+    location.hash.startsWith('#movie=') || location.hash.startsWith('#tv=')
     ? movieDetailsPage() :
     location.hash.startsWith('#profiles')
     ? profilesPage() :
@@ -114,22 +114,12 @@ function movieDetailsPage() {
     // topContainer.classList.add('inactive');
     notFoundContainer.classList.add('inactive');
     moviePreviewModal.classList.add('inactive');
+
+    const [contentTypeRaw, contentId] = location.hash.split('=');
+    const contentType = contentTypeRaw.substring(1);
+    printContentDetails(contentType, contentId);
 }
 function categoriesPage() {
     console.log('Categories!')
 }
 
-// Buttons
-
-moreButton.addEventListener('click', () => {
-    location.hash = '#config';
-  });
-
-backButton.addEventListener('click', () => {
-    const stateLoad = window.history.state ? window.history.state.loadUrl : '';
-    if (stateLoad.includes('#')) {
-        window.location.hash = '';
-    } else {
-        window.history.back();
-    }
-});
