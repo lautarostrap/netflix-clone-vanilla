@@ -6,7 +6,6 @@ window.addEventListener(
     },
     false,
 );
-window.addEventListener('DOMContentloaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
 
 function navigator() {
@@ -50,7 +49,79 @@ function homePage() {
 
     getContentHero();
     getTopContentPreview('movie');
-    getTopContentPreview('tv');
+    getTopContentPreview('tv'); 
+    
+    getRandomGenre('movie')
+        .then(genre => {
+            console.log(genre.id);
+            getSectionContent('movie', genre.id)
+                .then(contentArray => {
+                    console.log(contentArray)
+                    printGenericHScrollSection(
+                        genre.name,
+                        homeVScrollContainer,
+                        contentArray,
+                        'movie',
+                    );
+                })
+        })
+    getRandomGenre('tv')
+        .then(genre => {
+            console.log(genre.id);
+            getSectionContent('tv', genre.id)
+                .then(contentArray => {
+                    console.log(contentArray)
+                    printGenericHScrollSection(
+                        genre.name,
+                        homeVScrollContainer,
+                        contentArray,
+                        'tv',
+                    );
+                })
+        })
+    getRandomGenre('movie')
+        .then(genre => {
+            console.log(genre.id);
+            getSectionContent('movie', genre.id)
+                .then(contentArray => {
+                    console.log(contentArray)
+                    printGenericHScrollSection(
+                        genre.name,
+                        homeVScrollContainer,
+                        contentArray,
+                        'movie',
+                    );
+                })
+        })
+    getRandomGenre('movie')
+        .then(genre => {
+            console.log(genre.id);
+            getSectionContent('movie', genre.id)
+                .then(contentArray => {
+                    console.log(contentArray)
+                    printGenericHScrollSection(
+                        genre.name,
+                        homeVScrollContainer,
+                        contentArray,
+                        'movie',
+                    );
+                })
+        })
+    getRandomGenre('tv')
+        .then(genre => {
+            console.log(genre.id);
+            getSectionContent('tv', genre.id)
+                .then(contentArray => {
+                    console.log(contentArray)
+                    printGenericHScrollSection(
+                        genre.name,
+                        homeVScrollContainer,
+                        contentArray,
+                        'tv',
+                    );
+                })
+        })
+
 }
 function profilesPage() {
     console.log('Profiles!')
@@ -136,13 +207,24 @@ moreButton.forEach(button => button.addEventListener('click', () => {
     location.hash = '#config';
   }));
 
+// backButton.forEach(button => button.addEventListener('click', () => {
+//     const stateLoad = window.history.state ? window.history.state.loadUrl : '';
+//     if (stateLoad.includes('#')) {
+//         console.log('Debería ir al home');
+//         window.location.hash = '';
+//     } else {
+//         console.log('Debería sólo retroceder');
+//         window.history.back();
+//        } 
+// }));
 backButton.forEach(button => button.addEventListener('click', () => {
-    const stateLoad = window.history.state ? window.history.state.loadUrl : '';
-    if (stateLoad.includes('#')) {
+    if (document.domain !== 'localhost') {
+        console.log(document.domain);
         window.location.hash = '';
     } else {
+        console.log('Debería sólo retroceder');
         window.history.back();
-    }
+    } 
 }));
 
 closeButton.addEventListener('click', (event) => {

@@ -26,6 +26,10 @@ const getMovieRuntime = (runtimeParameter) => {
     return runtimeHours;
 }
 
+const getRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const printTopContentPosters = (movies, contentType) => {
 
     const topMainContainer = document.createElement('section');
@@ -78,7 +82,6 @@ const printContentHero = async (contentHero, contentType) => {
 
     getMovieDetails(contentType, contentHero.id)
         .then(content => {
-            console.log(content.genres)
             let contentGenre = content.genres;
         
             movieDescriptionContainer.innerHTML = "";     
@@ -205,6 +208,47 @@ const printContentDetails = async (contentType, contentId) => {
         });
 }
 
+const printGenericHScrollSection = async (
+    sectionTitle, 
+    sectionToInsert,
+    contentInfo, 
+    contentType) => {
+        const genericHContainer = document.createElement('section');
+        genericHContainer.classList.add('genre-movies__main-container');
+        const genericHContainerTitle = document.createElement('h2');
+        genericHContainerTitle.classList.add('genre-movies__title');
+
+        const contentTypeTitle = 
+            (contentType === 'movie')
+                ? 'movies' 
+                : 'TV shows';
+
+        genericHContainerTitle.innerHTML =  `Best ${sectionTitle} ${contentTypeTitle}`;
+        genericHContainer.appendChild(genericHContainerTitle);
+
+        const genericHScrollContainer = document.createElement('div');
+        genericHScrollContainer.classList.add('genre-movies__scroll-container');
+        
+        contentInfo.forEach(contentItem => {
+            
+            const genericContentContainer = document.createElement('article');
+            genericContentContainer.classList.add('movie__image');
+
+            const movieImg = document.createElement('img');
+            movieImg.setAttribute('alt', contentItem.title);
+            movieImg.setAttribute('src',
+                `${POSTER_300W_URL}${contentItem.poster_path}`
+            );
+            movieImg.addEventListener('click', () => printContentPreview(contentType, contentItem.id));
+
+            genericContentContainer.appendChild(movieImg);
+            genericHScrollContainer.appendChild(genericContentContainer);
+            genericHContainer.appendChild(genericHScrollContainer);
+            sectionToInsert.appendChild(genericHContainer);
+    
+        })
+}
+
 // API
 
 const getMovieDetails = async (contentType, contentId, extraInfo) => {
@@ -229,14 +273,13 @@ const getTopContentPreview = async (contentType) => {
 
 const getContentHero = async () => {
     
-    let randomNumber = Math.random();
-    let randomNumber2 = Math.random();
+    const randomContentTypeNumber = getRandomNumber(1, 2);
+    let randomPosterNumber = getRandomNumber(1, 10);
     
-    let randomContentType;
-    (randomNumber < 0.5) 
-    ? randomContentType = 'movie' 
-    : randomContentType = 'tv';
-    console.log('Content type: ' + randomContentType);
+    const randomContentType =
+        (randomContentTypeNumber === 1) 
+            ? 'movie' 
+            : 'tv';
     const { data } = await api(`/discover/${randomContentType}`, {
         params: {
             sort_by: 'vote_average.desc',
@@ -244,12 +287,40 @@ const getContentHero = async () => {
         },
     });
 
-    let randomPoster = Math.floor(randomNumber2 * 10);
     const contentHero =
-        (data.results[randomPoster])
-            ? data.results[randomPoster]
-            : data.results[randomPoster+1];
+        (data.results[randomPosterNumber])
+            ? data.results[randomPosterNumber]
+            : data.results[randomPosterNumber-1];
     
     printContentHero(contentHero, randomContentType);
+}
+
+const getSectionContent = async (contentType, genreId) => {
+    try {
+        const { data } = await api(`/discover/${contentType}`, {
+            params: {
+                with_genres: genreId,
+            }});
+            console.log(data.results);
+         return new Promise((resolve) => {resolve(data.results)});
+     }
+     catch (err) {
+         console.error(err);
+     }
+}
+
+const getRandomGenre = async (contentTypeParameter) => {
+    let randomContentTypeNumber = getRandomNumber(1, 2);
+    
+    const randomContentType = contentTypeParameter || (randomContentTypeNumber === 1) ? 'movie' : 'tv';
+
+    try {
+        const { data } = await api(`/genre/${randomContentType}/list`);
+        const randomGenreIndex = getRandomNumber(1, data.genres.length);
+        return new Promise((resolve) => {resolve(data.genres[randomGenreIndex])});
+     }
+     catch (err) {
+         console.error(err);
+     }
 }
 
