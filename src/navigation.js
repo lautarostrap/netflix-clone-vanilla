@@ -34,7 +34,9 @@ function homePage() {
     detailSection.classList.add('inactive');
     configSection.classList.add('inactive');
     homeHeader.classList.remove('inactive');
+    searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.remove('inactive');
+    searchVScrollContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -122,7 +124,9 @@ function profilesPage() {
     detailSection.classList.add('inactive');
     configSection.classList.add('inactive');
     homeHeader.classList.add('inactive');
+    searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.add('inactive');
+    searchVScrollContainer.classList.add('inactive');
     profilesHeader.classList.remove('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -142,7 +146,9 @@ function configPage() {
     detailSection.classList.add('inactive');
     configSection.classList.remove('inactive');
     homeHeader.classList.add('inactive');
+    searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.add('inactive');
+    searchVScrollContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -157,6 +163,25 @@ function configPage() {
 }
 function searchPage() {
     console.log('Search!')
+
+    profilesSection.classList.add('inactive');
+    detailSection.classList.add('inactive');
+    configSection.classList.add('inactive');
+    homeHeader.classList.add('inactive');
+    searchHeader.classList.remove('inactive');
+    genericVScrollContainer.classList.add('inactive');
+    searchVScrollContainer.classList.remove('inactive');
+    profilesHeader.classList.add('inactive');
+    notFoundHeader.classList.add('inactive');
+    movieDetailHeader.classList.add('inactive');
+    configHeader.classList.add('inactive');
+    moviesSeriesHeader.classList.add('inactive');
+    footer.classList.add('inactive');
+    heroContainer.classList.add('inactive');
+    genreContainer.classList.add('inactive');
+    // topContainer.classList.add('inactive');
+    notFoundContainer.classList.add('inactive');
+    moviePreviewModal.classList.add('inactive');
 }
 function movieDetailsPage() {
     console.log('Details!')
@@ -165,7 +190,9 @@ function movieDetailsPage() {
     detailSection.classList.remove('inactive');
     configSection.classList.add('inactive');
     homeHeader.classList.add('inactive');
+    searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.add('inactive');
+    searchVScrollContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.remove('inactive');
@@ -192,7 +219,9 @@ function moviesOrShowsPage() {
     detailSection.classList.add('inactive');
     configSection.classList.add('inactive');
     homeHeader.classList.add('inactive');
+    searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.remove('inactive');
+    searchVScrollContainer.classList.remove('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -298,6 +327,9 @@ seriesButton.forEach(button => button.addEventListener('click', () => {
 }));
 moviesButton.forEach(button => button.addEventListener('click', () => {
     location.hash = '#movies';
+}));
+searchButton.forEach(button => button.addEventListener('click', () => {
+    location.hash = '#search=';
 }));
 
 closeButton.addEventListener('click', (event) => {

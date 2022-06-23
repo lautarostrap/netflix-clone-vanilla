@@ -11,6 +11,7 @@ const profilesSection = $('.main--routes-container');
 const detailSection = $('.movie-detail__main-container'); 
 const configSection = $('.more__main-container');
 const genericVScrollContainer = $('.generic__vScrollContainer');
+const searchVScrollContainer = $('.search__vScrollContainer');
 
 // Containers
 const homeHeader = $('.header__home');
@@ -19,6 +20,7 @@ const notFoundHeader = $('.header__not-found');
 const movieDetailHeader = $('.header__movie-detail');
 const configHeader = $('.header__more');
 const moviesSeriesHeader = $('.header__movies-series');
+const searchHeader = $('.header__search');
 
 const contentDetailsImageContainer = $('.movie__image-container');
 const contentDetailsFeatures = $('.movie__features');
@@ -59,6 +61,7 @@ const backButton = selectorToString('.back--button');
 const seriesButton = selectorToString('.series--button');
 const moviesButton = selectorToString('.movies--button');
 const categoriesButton = selectorToString('.categories--button');
+const searchButton = selectorToString('.search--button');
 const closeButton = $('.movie__close');
 const moreDetailsPreviewButton = $('.more__container p');
 
