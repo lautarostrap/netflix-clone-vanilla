@@ -112,7 +112,7 @@ button {
     justify-self: center;
 }
 
-.link-container li span {
+.dropdown-icon {
     display: inline-block;
     width: 13px;
     height: 8px;
@@ -242,6 +242,33 @@ button {
 
 .header__movies-series .navbar-bottom {
     position: sticky;
+}
+
+.navbar-top .navbar-left h2 {
+    margin-left: 16px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.header__movies-series .navbar-bottom button {
+    background: none;
+    border: none;
+}
+
+.header__movies-series .navbar-bottom div {
+    display: inline;
+}
+
+.header__movies-series .navbar-bottom div:nth-child(1) button {
+    color: var(--white);
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin-left: 12px;
+}
+
+.header__movies-series .navbar-bottom div:nth-child(2) button {
+    color: var(--shadow);
+    margin-left: 12px;
 }
 
     /* Main */
