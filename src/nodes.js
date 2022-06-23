@@ -10,7 +10,7 @@ const selectorToString = (selector) => {
 const profilesSection = $('.main--routes-container'); 
 const detailSection = $('.movie-detail__main-container'); 
 const configSection = $('.more__main-container');
-const homeVScrollContainer = $('.home__vScrollContainer');
+const genericVScrollContainer = $('.generic__vScrollContainer');
 
 // Containers
 const homeHeader = $('.header__home');
@@ -56,8 +56,15 @@ const contentDetailsDirectingTitle = $('.direction strong');
 
 const moreButton = selectorToString('.profile__more-button');
 const backButton = selectorToString('.back--button');
+const seriesButton = selectorToString('.series--button');
+const moviesButton = selectorToString('.movies--button');
+const categoriesButton = selectorToString('.categories--button');
 const closeButton = $('.movie__close');
+const moreDetailsPreviewButton = $('.more__container p');
+
+const sectionTitle = $('.navbar-left h2');
 
 // Modals
 
 const moviePreviewModal = $('.movie-preview__main-container')
+const movieSerieModal = $('.modal--movie-serie')

@@ -15,6 +15,13 @@ const POSTER_500W_URL = 'https://image.tmdb.org/t/p/w500/';
 
 // Utils
 
+
+
+const setSectionName = (sectionName) => {
+    sectionTitle.innerHTML = sectionName;
+    movieSerieModal.innerHTML = sectionName;
+}
+
 const getMovieRuntime = (runtimeParameter) => {
     let runtimeMinutes = runtimeParameter
     let hoursAccumulator = 0;
@@ -65,7 +72,7 @@ const printTopContentPosters = (movies, contentType) => {
         topMovieContainer.appendChild(movieImg);
         topScrollContainer.appendChild(topMovieContainer);
         topMainContainer.appendChild(topScrollContainer);
-        homeVScrollContainer.appendChild(topMainContainer);
+        genericVScrollContainer.appendChild(topMainContainer);
     
     }
 }
@@ -120,6 +127,13 @@ const printContentPreview = async (contentType, contentId) => {
         
             contentImageContainer.appendChild(contentImg)
         
+        
+            detailsButtonText = 
+                (contentType === 'tv')
+                    ? 'Episodes'       
+                    : 'Details';
+            moreDetailsPreviewButton.textContent = `${detailsButtonText} & more`;
+
             contentInfoTitle.textContent = 
                 (contentType === 'tv')
                     ? content.name       
@@ -271,28 +285,32 @@ const getTopContentPreview = async (contentType) => {
     // console.log(movies[1].title);
 }
 
-const getContentHero = async () => {
-    
+const getContentHero = async (contentTypeParam) => {
+
     const randomContentTypeNumber = getRandomNumber(1, 2);
-    let randomPosterNumber = getRandomNumber(1, 10);
-    
-    const randomContentType =
-        (randomContentTypeNumber === 1) 
-            ? 'movie' 
+
+    const randomContentType = 
+        (!contentTypeParam && randomContentTypeNumber === 1)
+            ? 'movie'
             : 'tv';
-    const { data } = await api(`/discover/${randomContentType}`, {
+
+    const contentType = contentTypeParam || randomContentType;
+    
+    const randomPosterNumber =
+        (contentType === 'movie')
+            ? getRandomNumber(11, 13)
+            : getRandomNumber(4, 6);
+
+    const { data } = await api(`/discover/${contentType}`, {
         params: {
             sort_by: 'vote_average.desc',
             'vote_count.gte': 10000,
         },
     });
 
-    const contentHero =
-        (data.results[randomPosterNumber])
-            ? data.results[randomPosterNumber]
-            : data.results[randomPosterNumber-1];
-    
-    printContentHero(contentHero, randomContentType);
+    const contentHero = data.results[randomPosterNumber];
+            
+    printContentHero(contentHero, contentType);
 }
 
 const getSectionContent = async (contentType, genreId) => {
@@ -301,7 +319,6 @@ const getSectionContent = async (contentType, genreId) => {
             params: {
                 with_genres: genreId,
             }});
-            console.log(data.results);
          return new Promise((resolve) => {resolve(data.results)});
      }
      catch (err) {

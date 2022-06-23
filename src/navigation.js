@@ -15,6 +15,8 @@ function navigator() {
     ? searchPage()       :
     location.hash.startsWith('#movie=') || location.hash.startsWith('#tv=')
     ? movieDetailsPage() :
+    location.hash.startsWith('#movies') || location.hash.startsWith('#tvs')
+    ? moviesOrShowsPage() :
     location.hash.startsWith('#profiles')
     ? profilesPage() :
     location.hash.startsWith('#category=')
@@ -32,7 +34,7 @@ function homePage() {
     detailSection.classList.add('inactive');
     configSection.classList.add('inactive');
     homeHeader.classList.remove('inactive');
-    homeVScrollContainer.classList.remove('inactive');
+    genericVScrollContainer.classList.remove('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -45,7 +47,7 @@ function homePage() {
     notFoundContainer.classList.add('inactive');
     moviePreviewModal.classList.add('inactive');
 
-    homeVScrollContainer.innerHTML = "";
+    genericVScrollContainer.innerHTML = "";
 
     getContentHero();
     getTopContentPreview('movie');
@@ -53,13 +55,11 @@ function homePage() {
     
     getRandomGenre('movie')
         .then(genre => {
-            console.log(genre.id);
             getSectionContent('movie', genre.id)
                 .then(contentArray => {
-                    console.log(contentArray)
                     printGenericHScrollSection(
                         genre.name,
-                        homeVScrollContainer,
+                        genericVScrollContainer,
                         contentArray,
                         'movie',
                     );
@@ -67,13 +67,11 @@ function homePage() {
         })
     getRandomGenre('tv')
         .then(genre => {
-            console.log(genre.id);
             getSectionContent('tv', genre.id)
                 .then(contentArray => {
-                    console.log(contentArray)
                     printGenericHScrollSection(
                         genre.name,
-                        homeVScrollContainer,
+                        genericVScrollContainer,
                         contentArray,
                         'tv',
                     );
@@ -81,13 +79,11 @@ function homePage() {
         })
     getRandomGenre('movie')
         .then(genre => {
-            console.log(genre.id);
             getSectionContent('movie', genre.id)
                 .then(contentArray => {
-                    console.log(contentArray)
                     printGenericHScrollSection(
                         genre.name,
-                        homeVScrollContainer,
+                        genericVScrollContainer,
                         contentArray,
                         'movie',
                     );
@@ -95,13 +91,11 @@ function homePage() {
         })
     getRandomGenre('movie')
         .then(genre => {
-            console.log(genre.id);
             getSectionContent('movie', genre.id)
                 .then(contentArray => {
-                    console.log(contentArray)
                     printGenericHScrollSection(
                         genre.name,
-                        homeVScrollContainer,
+                        genericVScrollContainer,
                         contentArray,
                         'movie',
                     );
@@ -109,13 +103,11 @@ function homePage() {
         })
     getRandomGenre('tv')
         .then(genre => {
-            console.log(genre.id);
             getSectionContent('tv', genre.id)
                 .then(contentArray => {
-                    console.log(contentArray)
                     printGenericHScrollSection(
                         genre.name,
-                        homeVScrollContainer,
+                        genericVScrollContainer,
                         contentArray,
                         'tv',
                     );
@@ -130,7 +122,7 @@ function profilesPage() {
     detailSection.classList.add('inactive');
     configSection.classList.add('inactive');
     homeHeader.classList.add('inactive');
-    homeVScrollContainer.classList.add('inactive');
+    genericVScrollContainer.classList.add('inactive');
     profilesHeader.classList.remove('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -150,7 +142,7 @@ function configPage() {
     detailSection.classList.add('inactive');
     configSection.classList.remove('inactive');
     homeHeader.classList.add('inactive');
-    homeVScrollContainer.classList.add('inactive');
+    genericVScrollContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -173,7 +165,7 @@ function movieDetailsPage() {
     detailSection.classList.remove('inactive');
     configSection.classList.add('inactive');
     homeHeader.classList.add('inactive');
-    homeVScrollContainer.classList.add('inactive');
+    genericVScrollContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.remove('inactive');
@@ -192,6 +184,81 @@ function movieDetailsPage() {
 }
 function categoriesPage() {
     console.log('Categories!')
+}
+function moviesOrShowsPage() {
+    console.log('movies/shows!')
+
+    profilesSection.classList.add('inactive');
+    detailSection.classList.add('inactive');
+    configSection.classList.add('inactive');
+    homeHeader.classList.add('inactive');
+    genericVScrollContainer.classList.remove('inactive');
+    profilesHeader.classList.add('inactive');
+    notFoundHeader.classList.add('inactive');
+    movieDetailHeader.classList.add('inactive');
+    configHeader.classList.add('inactive');
+    moviesSeriesHeader.classList.remove('inactive');
+    footer.classList.add('inactive');
+    heroContainer.classList.remove('inactive');
+    genreContainer.classList.remove('inactive');
+    // topContainer.classList.remove('inactive');
+    notFoundContainer.classList.add('inactive');
+    moviePreviewModal.classList.add('inactive');
+
+    
+    genericVScrollContainer.innerHTML = "";
+    
+    const contentTypeRaw = location.hash;
+    const contentType = contentTypeRaw.slice(1, -1);
+    console.log(contentType);
+    
+
+    const sectionName = 
+        (contentType === 'tv')
+            ? 'Series'
+            : 'Movies';
+    setSectionName(sectionName);
+
+    getContentHero(contentType);
+    
+    getTopContentPreview(contentType); 
+    
+    getRandomGenre(contentType)
+        .then(genre => {
+            getSectionContent(contentType, genre.id)
+                .then(contentArray => {
+                    printGenericHScrollSection(
+                        genre.name,
+                        genericVScrollContainer,
+                        contentArray,
+                        contentType,
+                    );
+                })
+        })
+    getRandomGenre(contentType)
+        .then(genre => {
+            getSectionContent(contentType, genre.id)
+                .then(contentArray => {
+                    printGenericHScrollSection(
+                        genre.name,
+                        genericVScrollContainer,
+                        contentArray,
+                        contentType,
+                    );
+                })
+        })
+    getRandomGenre(contentType)
+        .then(genre => {
+            getSectionContent(contentType, genre.id)
+                .then(contentArray => {
+                    printGenericHScrollSection(
+                        genre.name,
+                        genericVScrollContainer,
+                        contentArray,
+                        contentType,
+                    );
+                })
+        })
 }
 
     // Buttons
@@ -226,8 +293,15 @@ backButton.forEach(button => button.addEventListener('click', () => {
         window.history.back();
     } 
 }));
+seriesButton.forEach(button => button.addEventListener('click', () => {
+    location.hash = '#tvs';
+}));
+moviesButton.forEach(button => button.addEventListener('click', () => {
+    location.hash = '#movies';
+}));
 
 closeButton.addEventListener('click', (event) => {
     event.stopPropagation();
     toggleInactive(moviePreviewModal)
 });
+
