@@ -263,6 +263,36 @@ const printGenericHScrollSection = async (
         })
 }
 
+const printTopSearchContent = async (contentArray) => {
+    console.log(contentArray);
+
+    contentArray.forEach(content => {
+        const contentItem = document.createElement('div');
+        contentItem.classList.add('search__content-item');
+        const contentItemLeft = document.createElement('div');
+        const contentImage = document.createElement('img');
+        contentImage.setAttribute('src', 
+            `${POSTER_300W_URL}${content.backdrop_path}`
+        )
+        const contentTitle = document.createElement('p');
+        const contentTitleText = document.createTextNode(content.title);
+        contentTitle.appendChild(contentTitleText);
+
+
+        const contentItemButton = document.createElement('button');
+    
+        contentItemLeft.appendChild(contentImage);
+        contentItemLeft.appendChild(contentTitle);
+        contentItem.appendChild(contentItemLeft);
+        contentItem.appendChild(contentItemButton);
+        searchVScrollContainer.appendChild(contentItem)
+
+
+
+    })
+
+}
+
 // API
 
 const getMovieDetails = async (contentType, contentId, extraInfo) => {
@@ -313,11 +343,12 @@ const getContentHero = async (contentTypeParam) => {
     printContentHero(contentHero, contentType);
 }
 
-const getSectionContent = async (contentType, genreId) => {
+const getSectionContent = async (contentType, genreId, filter) => {
     try {
         const { data } = await api(`/discover/${contentType}`, {
             params: {
                 with_genres: genreId,
+                sort_by: filter,
             }});
          return new Promise((resolve) => {resolve(data.results)});
      }

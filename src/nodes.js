@@ -31,6 +31,7 @@ const heroContainer = $('.hero-movie');
 const genreContainer = $('.genre-movies__main-container'); 
 const topContainer = $('.top-movies__main-container'); 
 const notFoundContainer = $('.not-found__main-container');
+const searchContentContainer = $('.search__content-container');
 
 const topMovieContainer = $('.top__image');
 const topScrollContainer = $('.top-movies__scroll-container');

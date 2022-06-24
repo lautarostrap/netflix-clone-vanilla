@@ -182,6 +182,13 @@ function searchPage() {
     // topContainer.classList.add('inactive');
     notFoundContainer.classList.add('inactive');
     moviePreviewModal.classList.add('inactive');
+
+    getSectionContent('movie', null, 'popularity.desc')
+        .then(contentArray => {
+            searchContentContainer.innerHTML = "";
+            printTopSearchContent(contentArray);
+        })
+    
 }
 function movieDetailsPage() {
     console.log('Details!')

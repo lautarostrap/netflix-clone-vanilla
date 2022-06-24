@@ -279,6 +279,7 @@ button {
     width: 100vw;
     position: fixed;
     top: 0;
+    background-color: var(--black);
 }
 
 .header__search .navbar-top {
@@ -925,9 +926,10 @@ article .overview {
 }
 
 .search__content-item {
+    margin: 2px 0;
     display: flex;
     justify-content: space-between;
-    height: 68px;
+    height: 60px;
     width: 100%;
     background-color: var(--very-dark-grey);
 }
@@ -939,7 +941,6 @@ article .overview {
 
 .search__content-item img {
     height: 100%;
-
 }
 
 .search__content-item p {
@@ -955,7 +956,7 @@ article .overview {
     border: 1px solid var(--white);
     background-image: url('../assets/icons/play-white.png');
     background-position: center;
-    background-position-x: 4.55px;
+    background-position-x: 4.5px;
     background-size: 45%;
     background-repeat: no-repeat;
 }
