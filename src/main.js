@@ -278,6 +278,7 @@ const printTopSearchContent = async (contentArray) => {
         const contentTitleText = document.createTextNode(content.title);
         contentTitle.appendChild(contentTitleText);
 
+        contentItem.addEventListener('click', () => printContentPreview('movie', content.id));
 
         const contentItemButton = document.createElement('button');
     
