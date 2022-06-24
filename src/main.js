@@ -15,8 +15,6 @@ const POSTER_500W_URL = 'https://image.tmdb.org/t/p/w500/';
 
 // Utils
 
-
-
 const setSectionName = (sectionName) => {
     sectionTitle.innerHTML = sectionName;
     movieSerieModal.innerHTML = sectionName;
@@ -222,7 +220,7 @@ const printContentDetails = async (contentType, contentId) => {
         });
 }
 
-const printGenericHScrollSection = async (
+const printGenericHorizontalSection = async (
     sectionTitle, 
     sectionToInsert,
     contentInfo, 
@@ -263,6 +261,32 @@ const printGenericHScrollSection = async (
         })
 }
 
+const printGenericVerticalSection = async (contentArray) => {
+    contentArray.forEach(content => {
+        const contentContainer = document.createElement('article');
+        contentContainer.classList.add('searched-content__image');
+    
+        const contentImage = document.createElement('img');
+        contentImage.setAttribute('alt', content.title);
+
+        if(!content.poster_path) {
+            contentImage.setAttribute('src', 
+                `https://via.placeholder.com/300x450/b81d24/ffffff?text=${content.title}`
+            );
+        } else {
+            contentImage.setAttribute('src', 
+                `${POSTER_300W_URL}${content.poster_path}`
+            );
+        }
+        
+        contentImage.addEventListener('click', () => printContentPreview('movie', content.id));
+
+        contentContainer.appendChild(contentImage);
+        searchContentContainer.appendChild(contentContainer)
+    })
+    
+}
+
 const printTopSearchContent = async (contentArray) => {
     console.log(contentArray);
 
@@ -271,6 +295,7 @@ const printTopSearchContent = async (contentArray) => {
         contentItem.classList.add('search__content-item');
         const contentItemLeft = document.createElement('div');
         const contentImage = document.createElement('img');
+        contentImage.setAttribute('alt', content.title)
         contentImage.setAttribute('src', 
             `${POSTER_300W_URL}${content.backdrop_path}`
         )
@@ -286,7 +311,7 @@ const printTopSearchContent = async (contentArray) => {
         contentItemLeft.appendChild(contentTitle);
         contentItem.appendChild(contentItemLeft);
         contentItem.appendChild(contentItemButton);
-        searchVScrollContainer.appendChild(contentItem)
+        topSearchedContentContainer.appendChild(contentItem)
 
 
 
@@ -356,6 +381,20 @@ const getSectionContent = async (contentType, genreId, filter) => {
      catch (err) {
          console.error(err);
      }
+}
+
+const getContentBySearch = async (contentType, query) => {
+    const { data } = await api(`/search/${contentType}`, {
+        params: {
+            query,
+        },
+    })
+    const content = data.results;
+
+    searchContentContainer.innerHTML = "";
+    topSearchedContentContainer.classList.add('inactive');
+    topSearchedContentContainer.innerHTML = "";
+    printGenericVerticalSection(content)
 }
 
 const getRandomGenre = async (contentTypeParameter) => {

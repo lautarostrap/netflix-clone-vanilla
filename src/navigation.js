@@ -11,7 +11,7 @@ window.addEventListener('hashchange', navigator, false);
 function navigator() {
     location.hash.startsWith('#config')
     ? configPage()       :
-    location.hash.startsWith('#search=')
+    location.hash.startsWith('#search')
     ? searchPage()       :
     location.hash.startsWith('#movie=') || location.hash.startsWith('#tv=')
     ? movieDetailsPage() :
@@ -59,7 +59,7 @@ function homePage() {
         .then(genre => {
             getSectionContent('movie', genre.id)
                 .then(contentArray => {
-                    printGenericHScrollSection(
+                    printGenericHorizontalSection(
                         genre.name,
                         genericVScrollContainer,
                         contentArray,
@@ -71,7 +71,7 @@ function homePage() {
         .then(genre => {
             getSectionContent('tv', genre.id)
                 .then(contentArray => {
-                    printGenericHScrollSection(
+                    printGenericHorizontalSection(
                         genre.name,
                         genericVScrollContainer,
                         contentArray,
@@ -83,7 +83,7 @@ function homePage() {
         .then(genre => {
             getSectionContent('movie', genre.id)
                 .then(contentArray => {
-                    printGenericHScrollSection(
+                    printGenericHorizontalSection(
                         genre.name,
                         genericVScrollContainer,
                         contentArray,
@@ -95,7 +95,7 @@ function homePage() {
         .then(genre => {
             getSectionContent('movie', genre.id)
                 .then(contentArray => {
-                    printGenericHScrollSection(
+                    printGenericHorizontalSection(
                         genre.name,
                         genericVScrollContainer,
                         contentArray,
@@ -107,7 +107,7 @@ function homePage() {
         .then(genre => {
             getSectionContent('tv', genre.id)
                 .then(contentArray => {
-                    printGenericHScrollSection(
+                    printGenericHorizontalSection(
                         genre.name,
                         genericVScrollContainer,
                         contentArray,
@@ -183,12 +183,25 @@ function searchPage() {
     notFoundContainer.classList.add('inactive');
     moviePreviewModal.classList.add('inactive');
 
+    searchContentContainer.innerHTML = "";
+    
     getSectionContent('movie', null, 'popularity.desc')
         .then(contentArray => {
-            searchContentContainer.innerHTML = "";
             printTopSearchContent(contentArray);
+    })
+
+    const [_, undecodedQuery] = location.hash.split('=');
+    const query = decodeURI(undecodedQuery);
+    getContentBySearch('movie', query);
+    if(query == '') {
+        topSearchedContentContainer.classList.remove('inactive');
+        getSectionContent('movie', null, 'popularity.desc')
+            .then(contentArray => {
+                printTopSearchContent(contentArray);
         })
-    
+    }
+    console.log('query: ' + query);
+
 }
 function movieDetailsPage() {
     console.log('Details!')
@@ -263,7 +276,7 @@ function moviesOrShowsPage() {
         .then(genre => {
             getSectionContent(contentType, genre.id)
                 .then(contentArray => {
-                    printGenericHScrollSection(
+                    printGenericHorizontalSection(
                         genre.name,
                         genericVScrollContainer,
                         contentArray,
@@ -275,7 +288,7 @@ function moviesOrShowsPage() {
         .then(genre => {
             getSectionContent(contentType, genre.id)
                 .then(contentArray => {
-                    printGenericHScrollSection(
+                    printGenericHorizontalSection(
                         genre.name,
                         genericVScrollContainer,
                         contentArray,
@@ -287,7 +300,7 @@ function moviesOrShowsPage() {
         .then(genre => {
             getSectionContent(contentType, genre.id)
                 .then(contentArray => {
-                    printGenericHScrollSection(
+                    printGenericHorizontalSection(
                         genre.name,
                         genericVScrollContainer,
                         contentArray,
@@ -342,5 +355,10 @@ searchButton.forEach(button => button.addEventListener('click', () => {
 closeButton.addEventListener('click', (event) => {
     event.stopPropagation();
     toggleInactive(moviePreviewModal)
+});
+
+searchInput.addEventListener('input', (event) => {
+    console.log(event.target.value);
+    location.hash = '#search=' + event.target.value;
 });
 

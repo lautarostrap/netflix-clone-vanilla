@@ -961,7 +961,22 @@ article .overview {
     background-repeat: no-repeat;
 }
 
+.search__content-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+    margin: 0 auto;
+}
 
+.searched-content__image {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.searched-content__image img {
+    width: 110px;
+    border-radius: 4px;
+}
 
     /* Modals */
 

@@ -31,6 +31,7 @@ const heroContainer = $('.hero-movie');
 const genreContainer = $('.genre-movies__main-container'); 
 const topContainer = $('.top-movies__main-container'); 
 const notFoundContainer = $('.not-found__main-container');
+const topSearchedContentContainer = $('.search__content-container--top');
 const searchContentContainer = $('.search__content-container');
 
 const topMovieContainer = $('.top__image');
@@ -65,6 +66,8 @@ const categoriesButton = selectorToString('.categories--button');
 const searchButton = selectorToString('.search--button');
 const closeButton = $('.movie__close');
 const moreDetailsPreviewButton = $('.more__container p');
+
+const searchInput = $('.search--input');
 
 const sectionTitle = $('.navbar-left h2');
 
