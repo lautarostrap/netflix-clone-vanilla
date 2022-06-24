@@ -13,6 +13,44 @@ const api = axios.create({
 const POSTER_300W_URL = 'https://image.tmdb.org/t/p/w300/';
 const POSTER_500W_URL = 'https://image.tmdb.org/t/p/w500/';
 
+const contentIsLiked = (content, button, contentType) => {
+    let likedContent = likedContentList(contentType);
+
+    if(likedContent[content.id]) {
+        button.classList.add('my-list--button--liked');
+        button.classList.add('my-list--button');
+    } else {
+        button.classList.remove('my-list--button--liked');
+        button.classList.add('my-list--button');
+    } 
+}
+
+const likedContentList = (contentType) => {
+    const item = JSON.parse(localStorage.getItem(`liked_${contentType}`));
+    let content;
+
+    if (item) {
+        content = item;
+    } else {
+        content = {};
+    }
+    return content;
+}
+
+const likeContent = (contentType, content) => {
+    let likedContent = likedContentList(contentType);
+
+    if(likedContent[content.id]) {
+        likedContent[content.id] = undefined;
+    } else {
+        likedContent[content.id] = content;  
+    } 
+    localStorage.setItem(`liked_${contentType}`, JSON.stringify(likedContent));
+    if (location.hash == ''){
+        getLikedContent(contentType);
+    }
+}
+
 // Utils
 
 const setSectionName = (sectionName) => {
@@ -88,6 +126,16 @@ const printContentHero = async (contentHero, contentType) => {
         url(${contentImgUrl}`;
     heroContainer.addEventListener('click', () => {printContentPreview(contentType, contentHero.id)});
 
+
+    contentIsLiked(contentHero, myListButton[0], contentType);
+
+    myListButton[0].addEventListener('click', (event) => {
+        event.stopPropagation();
+        myListButton[0].classList.toggle('my-list--button--liked');
+        myListButton[0].classList.toggle('my-list--button');
+        likeContent(contentType, contentHero);
+    });
+
     getMovieDetails(contentType, contentHero.id)
         .then(content => {
             let contentGenre = content.genres;
@@ -128,7 +176,6 @@ const printContentPreview = async (contentType, contentId) => {
         
             contentImageContainer.appendChild(contentImg)
         
-        
             detailsButtonText = 
                 (contentType === 'tv')
                     ? 'Episodes'       
@@ -167,6 +214,17 @@ const printContentPreview = async (contentType, contentId) => {
             contentLastsItem.appendChild(contentLastsText);
             contentInfoFeatures.appendChild(contentYearItem);
             contentInfoFeatures.appendChild(contentLastsItem);
+
+            contentIsLiked(content, myListButton[2], contentType);
+
+            myListButton[2].addEventListener('click', (event) => {
+                event.stopPropagation();
+                myListButton[2].classList.toggle('my-list--button--liked');
+                myListButton[2].classList.toggle('my-list--button');
+                likeContent(contentType, content);
+                console.log(content.id);
+                console.log(JSON.parse(localStorage.getItem('liked_movie')));
+            });
         })
 }
 
@@ -203,6 +261,16 @@ const printContentDetails = async (contentType, contentId) => {
             contentLastsItem.appendChild(contentLastsText);
             contentDetailsFeatures.appendChild(contentYearItem);
             contentDetailsFeatures.appendChild(contentLastsItem);
+
+            contentIsLiked(content, myListButton[1], contentType);
+
+            myListButton[1].addEventListener('click', (event) => {
+                event.stopPropagation();
+                myListButton[1].classList.toggle('my-list--button--liked');
+                myListButton[1].classList.toggle('my-list--button');
+                likeContent(contentType, content);
+                console.log(localStorage.getItem(`liked_${contentType}`));
+            });
         });
     getMovieDetails(contentType, contentId, '/credits')
         .then(extraInfo => {
@@ -228,27 +296,54 @@ const printContentDetails = async (contentType, contentId) => {
         });
 }
 
+const printMyListHorizontalSection = async (contentInfo, contentType) => {
+        // (localStorage.getItem('liked_tv') === null && localStorage.getItem('liked_movie') === null)
+        //     ? myListContainer.classList.remove('inactive')
+        //     : myListContainer.classList.add('inactive');
+
+        contentInfo.forEach(contentItem => {
+            
+            const genericContentContainer = document.createElement('article');
+            genericContentContainer.classList.add('movie__image');
+
+            const movieImg = document.createElement('img');
+            movieImg.setAttribute('alt', contentItem.title);
+            movieImg.setAttribute('src',
+                `${POSTER_300W_URL}${contentItem.poster_path}`
+            );
+            movieImg.addEventListener('click', () => printContentPreview(contentType, contentItem.id));
+
+            genericContentContainer.appendChild(movieImg);
+            myListScrollContainer.appendChild(genericContentContainer);
+        })
+}
 const printGenericHorizontalSection = async (
     sectionTitle, 
+    sectionClass,
     sectionToInsert,
     contentInfo, 
     contentType) => {
         const genericHContainer = document.createElement('section');
-        genericHContainer.classList.add('genre-movies__main-container');
+        genericHContainer.classList.add(`${sectionClass}__main-container`);
         const genericHContainerTitle = document.createElement('h2');
-        genericHContainerTitle.classList.add('genre-movies__title');
+        genericHContainerTitle.classList.add(`${sectionClass}__title`);
 
         const contentTypeTitle = 
             (contentType === 'movie')
                 ? 'movies' 
                 : 'TV shows';
 
-        genericHContainerTitle.innerHTML =  `Best ${sectionTitle} ${contentTypeTitle}`;
+
+        (sectionTitle === 'My list')
+            ? genericHContainerTitle.innerHTML = sectionTitle
+            : genericHContainerTitle.innerHTML =  `Best ${sectionTitle} ${contentTypeTitle}`;
+
+            
         genericHContainer.appendChild(genericHContainerTitle);
 
         const genericHScrollContainer = document.createElement('div');
-        genericHScrollContainer.classList.add('genre-movies__scroll-container');
-        
+        genericHScrollContainer.classList.add(`${sectionClass}__scroll-container`);
+
         contentInfo.forEach(contentItem => {
             
             const genericContentContainer = document.createElement('article');
@@ -415,19 +510,6 @@ const getContentBySearch = async (contentType, query) => {
          console.error(err);
      }
 }
-// const getContentBySearch = async (contentType, query) => {
-//     const { data } = await api(`/search/${contentType}`, {
-//         params: {
-//             query,
-//         },
-//     })
-//     const content = data.results;
-
-//     searchContentContainer.innerHTML = "";
-//     topSearchedContentContainer.classList.add('inactive');
-//     topSearchedContentContainer.innerHTML = "";
-//     printGenericVerticalSection(content)
-// }
 
 const getRandomGenre = async (contentTypeParameter) => {
     let randomContentTypeNumber = getRandomNumber(1, 2);
@@ -444,3 +526,8 @@ const getRandomGenre = async (contentTypeParameter) => {
      }
 }
 
+const getLikedContent = (contentType) => {
+    myListScrollContainer.innerHTML = "";
+    let likedContent = Object.values(likedContentList(contentType));
+    printMyListHorizontalSection(likedContent, contentType)
+}

@@ -52,6 +52,9 @@ function homePage() {
     genericVScrollContainer.innerHTML = "";
 
     getContentHero();
+
+    getLikedContent('movie');
+
     getTopContentPreview('movie');
     getTopContentPreview('tv'); 
     
@@ -61,6 +64,7 @@ function homePage() {
                 .then(contentArray => {
                     printGenericHorizontalSection(
                         genre.name,
+                        'genre-movies',
                         genericVScrollContainer,
                         contentArray,
                         'movie',
@@ -73,6 +77,7 @@ function homePage() {
                 .then(contentArray => {
                     printGenericHorizontalSection(
                         genre.name,
+                        'genre-movies',
                         genericVScrollContainer,
                         contentArray,
                         'tv',
@@ -85,6 +90,7 @@ function homePage() {
                 .then(contentArray => {
                     printGenericHorizontalSection(
                         genre.name,
+                        'genre-movies',
                         genericVScrollContainer,
                         contentArray,
                         'movie',
@@ -97,6 +103,7 @@ function homePage() {
                 .then(contentArray => {
                     printGenericHorizontalSection(
                         genre.name,
+                        'genre-movies',
                         genericVScrollContainer,
                         contentArray,
                         'movie',
@@ -109,6 +116,7 @@ function homePage() {
                 .then(contentArray => {
                     printGenericHorizontalSection(
                         genre.name,
+                        'genre-movies',
                         genericVScrollContainer,
                         contentArray,
                         'tv',
@@ -149,6 +157,7 @@ function configPage() {
     searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.add('inactive');
     searchVScrollContainer.classList.add('inactive');
+    myListContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -171,6 +180,7 @@ function searchPage() {
     searchHeader.classList.remove('inactive');
     genericVScrollContainer.classList.add('inactive');
     searchVScrollContainer.classList.remove('inactive');
+    myListContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -225,6 +235,7 @@ function movieDetailsPage() {
     searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.add('inactive');
     searchVScrollContainer.classList.add('inactive');
+    myListContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.remove('inactive');
@@ -253,7 +264,7 @@ function moviesOrShowsPage() {
     homeHeader.classList.add('inactive');
     searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.remove('inactive');
-    searchVScrollContainer.classList.remove('inactive');
+    searchVScrollContainer.classList.add('inactive');
     profilesHeader.classList.add('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -290,6 +301,7 @@ function moviesOrShowsPage() {
                 .then(contentArray => {
                     printGenericHorizontalSection(
                         genre.name,
+                        'genre-movies',
                         genericVScrollContainer,
                         contentArray,
                         contentType,
@@ -302,6 +314,7 @@ function moviesOrShowsPage() {
                 .then(contentArray => {
                     printGenericHorizontalSection(
                         genre.name,
+                        'genre-movies',
                         genericVScrollContainer,
                         contentArray,
                         contentType,
@@ -314,6 +327,7 @@ function moviesOrShowsPage() {
                 .then(contentArray => {
                     printGenericHorizontalSection(
                         genre.name,
+                        'genre-movies',
                         genericVScrollContainer,
                         contentArray,
                         contentType,

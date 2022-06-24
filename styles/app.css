@@ -440,24 +440,31 @@ button {
 
 /* Movie Scroll Container */
 
-.top-movies__main-container, .genre-movies__main-container {
+.my-list__main-container, 
+.top-movies__main-container, 
+.genre-movies__main-container {
     margin-left: 6px;
     margin-top: 8px;
 }
 
-.top-movies__title, .genre-movies__title {
+.my-list__title,
+.top-movies__title, 
+.genre-movies__title {
     font-size: 1.8rem;
     font-weight: bold;
     margin: 6px 0;
 }
 
-.top-movies__scroll-container, .genre-movies__scroll-container {
+.my-list__scroll-container, 
+.top-movies__scroll-container, 
+.genre-movies__scroll-container {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
     height: 180px;
 }
 
+.my-list__scroll-container::-webkit-scrollbar, 
 .top-movies__scroll-container::-webkit-scrollbar, 
 .genre-movies__scroll-container::-webkit-scrollbar {
     display: none;
@@ -1133,6 +1140,20 @@ article .overview {
 .movie-preview__main-container .buttons--list button {
     font-size: 3.4rem;
     color: var(--white);
+}
+.my-list--button::before {
+    content: '+';
+}
+body .my-list--button--liked::after {
+    content: '✓';
+    font-size: 2rem;
+}
+.button--rate p::before {
+    content: '🤍';
+}
+.button--rate--liked p::after {
+    content: '💙';
+    /* font-size: 2rem; */
 }
 
 .movie-preview__main-container .movie__more {

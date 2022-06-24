@@ -30,12 +30,14 @@ const footer = $('.footer')
 const heroContainer = $('.hero-movie'); 
 const genreContainer = $('.genre-movies__main-container'); 
 const topContainer = $('.top-movies__main-container'); 
+const myListContainer = $('.my-list__main-container'); 
 const notFoundContainer = $('.not-found__main-container');
 const topSearchedContentContainer = $('.search__content-container--top');
 const searchContentContainer = $('.search__content-container');
 
 const topMovieContainer = $('.top__image');
 const topScrollContainer = $('.top-movies__scroll-container');
+const myListScrollContainer = $('.my-list__scroll-container');
 
 const contentImageContainer = $('.movie-preview__image');
 const contentInfoContainer = $('.movie__info');
@@ -64,6 +66,7 @@ const seriesButton = selectorToString('.series--button');
 const moviesButton = selectorToString('.movies--button');
 const categoriesButton = selectorToString('.categories--button');
 const searchButton = selectorToString('.search--button');
+const myListButton = selectorToString('.my-list--button');
 const closeButton = $('.movie__close');
 const moreDetailsPreviewButton = $('.more__container p');
 
