@@ -185,23 +185,35 @@ function searchPage() {
 
     searchContentContainer.innerHTML = "";
     
-    getSectionContent('movie', null, 'popularity.desc')
-        .then(contentArray => {
-            printTopSearchContent(contentArray);
-    })
-
     const [_, undecodedQuery] = location.hash.split('=');
     const query = decodeURI(undecodedQuery);
-    getContentBySearch('movie', query);
+
     if(query == '') {
         topSearchedContentContainer.classList.remove('inactive');
-        getSectionContent('movie', null, 'popularity.desc')
-            .then(contentArray => {
-                printTopSearchContent(contentArray);
+        for(let i = 0; i < 10; i++) {
+            getSectionContent('movie', null, 'popularity.desc')
+                .then(moviesArray => {
+                    console.log('movie: ' + i)
+                    printTopSearchContent('movie', moviesArray[i]);
+                })
+            getSectionContent('tv', null, 'popularity.desc')
+                .then(seriesArray => {
+                    console.log('serie: ' + i)
+                    printTopSearchContent('tv', seriesArray[i]);
+            });
+        }
+    } else {
+        getContentBySearch('movie', query)
+        .then(moviesArray => {
+            console.log('query movie: ' + query)
+            printGenericVerticalSection('movie', moviesArray);
+            getContentBySearch('tv', query)
+                .then(seriesArray => {
+                    console.log('query series: ' + query)
+                    printGenericVerticalSection('tv', seriesArray);
+                })
         })
     }
-    console.log('query: ' + query);
-
 }
 function movieDetailsPage() {
     console.log('Details!')
@@ -358,7 +370,6 @@ closeButton.addEventListener('click', (event) => {
 });
 
 searchInput.addEventListener('input', (event) => {
-    console.log(event.target.value);
     location.hash = '#search=' + event.target.value;
 });
 

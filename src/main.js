@@ -27,7 +27,10 @@ const getMovieRuntime = (runtimeParameter) => {
         runtimeMinutes = runtimeMinutes - 60;
         hoursAccumulator++;
     }
-    const runtimeHours = `${hoursAccumulator}h ${runtimeMinutes}m`
+    const runtimeHours = 
+        (hoursAccumulator !== 0)
+            ? `${hoursAccumulator}h ${runtimeMinutes}m`
+            : `${runtimeMinutes}m`
     return runtimeHours;
 }
 
@@ -142,11 +145,16 @@ const printContentPreview = async (contentType, contentId) => {
                 (contentType === 'tv')
                     ? content.last_air_date.slice(0, 4)       
                     : content.release_date.slice(0, 4);
+
+            const numberOfSeasons = 
+                (content.number_of_seasons > 1)
+                    ? 'seasons'
+                    : 'season';
+
             const contentLasts = 
                 (contentType === 'tv')
-                    ? `${content.number_of_seasons} season/s`
+                    ? `${content.number_of_seasons} ${numberOfSeasons}`
                     : getMovieRuntime(content.runtime);
-            console.log(contentLasts);
 
             contentInfoFeatures.innerHTML = "";
             const contentYearText = document.createTextNode(contentYear);
@@ -261,7 +269,11 @@ const printGenericHorizontalSection = async (
         })
 }
 
-const printGenericVerticalSection = async (contentArray) => {
+const printGenericVerticalSection = async (contentType, contentArray) => {
+    searchContentContainer.innerHTML = "";
+    topSearchedContentContainer.classList.add('inactive');
+    topSearchedContentContainer.innerHTML = "";
+
     contentArray.forEach(content => {
         const contentContainer = document.createElement('article');
         contentContainer.classList.add('searched-content__image');
@@ -271,7 +283,9 @@ const printGenericVerticalSection = async (contentArray) => {
 
         if(!content.poster_path) {
             contentImage.setAttribute('src', 
-                `https://via.placeholder.com/300x450/b81d24/ffffff?text=${content.title}`
+                (contentType === 'movie')
+                    ? `https://via.placeholder.com/300x450/b81d24/ffffff?text=${content.title}`
+                    : `https://via.placeholder.com/300x450/b81d24/ffffff?text=${content.name}`
             );
         } else {
             contentImage.setAttribute('src', 
@@ -279,7 +293,7 @@ const printGenericVerticalSection = async (contentArray) => {
             );
         }
         
-        contentImage.addEventListener('click', () => printContentPreview('movie', content.id));
+        contentImage.addEventListener('click', () => printContentPreview(contentType, content.id));
 
         contentContainer.appendChild(contentImage);
         searchContentContainer.appendChild(contentContainer)
@@ -287,23 +301,28 @@ const printGenericVerticalSection = async (contentArray) => {
     
 }
 
-const printTopSearchContent = async (contentArray) => {
-    console.log(contentArray);
+const printTopSearchContent = async (contentType, content) => {
+    // contentArray.forEach(content => {
+        
+        let titleText =
+            (contentType === 'movie')
+                    ? content.title
+                    : content.name;
+        console.log(titleText);
 
-    contentArray.forEach(content => {
         const contentItem = document.createElement('div');
         contentItem.classList.add('search__content-item');
         const contentItemLeft = document.createElement('div');
         const contentImage = document.createElement('img');
-        contentImage.setAttribute('alt', content.title)
+        contentImage.setAttribute('alt', titleText)
         contentImage.setAttribute('src', 
             `${POSTER_300W_URL}${content.backdrop_path}`
         )
         const contentTitle = document.createElement('p');
-        const contentTitleText = document.createTextNode(content.title);
+        const contentTitleText = document.createTextNode(titleText);
         contentTitle.appendChild(contentTitleText);
 
-        contentItem.addEventListener('click', () => printContentPreview('movie', content.id));
+        contentItem.addEventListener('click', () => printContentPreview(contentType, content.id));
 
         const contentItemButton = document.createElement('button');
     
@@ -315,7 +334,7 @@ const printTopSearchContent = async (contentArray) => {
 
 
 
-    })
+    // })
 
 }
 
@@ -384,18 +403,31 @@ const getSectionContent = async (contentType, genreId, filter) => {
 }
 
 const getContentBySearch = async (contentType, query) => {
-    const { data } = await api(`/search/${contentType}`, {
-        params: {
-            query,
-        },
-    })
-    const content = data.results;
-
-    searchContentContainer.innerHTML = "";
-    topSearchedContentContainer.classList.add('inactive');
-    topSearchedContentContainer.innerHTML = "";
-    printGenericVerticalSection(content)
+    try {
+        const { data } = await api(`/search/${contentType}`, {
+            params: {
+                query,
+            },
+        })
+         return new Promise((resolve) => {resolve(data.results)});
+     }
+     catch (err) {
+         console.error(err);
+     }
 }
+// const getContentBySearch = async (contentType, query) => {
+//     const { data } = await api(`/search/${contentType}`, {
+//         params: {
+//             query,
+//         },
+//     })
+//     const content = data.results;
+
+//     searchContentContainer.innerHTML = "";
+//     topSearchedContentContainer.classList.add('inactive');
+//     topSearchedContentContainer.innerHTML = "";
+//     printGenericVerticalSection(content)
+// }
 
 const getRandomGenre = async (contentTypeParameter) => {
     let randomContentTypeNumber = getRandomNumber(1, 2);
