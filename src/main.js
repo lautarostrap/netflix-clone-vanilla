@@ -33,11 +33,12 @@ const likedContentList = (contentType) => {
         content = item;
     } else {
         content = {};
+
     }
     return content;
 }
 
-const likeContent = (contentType, content) => {
+const likeContent = (content, contentType) => {
     let likedContent = likedContentList(contentType);
 
     if(likedContent[content.id]) {
@@ -46,8 +47,13 @@ const likeContent = (contentType, content) => {
         likedContent[content.id] = content;  
     } 
     localStorage.setItem(`liked_${contentType}`, JSON.stringify(likedContent));
-    if (location.hash == ''){
-        getLikedContent(contentType);
+    console.log(JSON.parse(localStorage.getItem(`liked_${contentType}`)));
+    if (location.hash == '' || location.hash == '#'){
+        getLikedContent('both'); 
+    } else if (location.hash == '#tvs') {
+        getLikedContent('tv'); 
+    } else if (location.hash == '#movies') {
+        getLikedContent('movie');
     }
 }
 
@@ -127,13 +133,22 @@ const printContentHero = async (contentHero, contentType) => {
     heroContainer.addEventListener('click', () => {printContentPreview(contentType, contentHero.id)});
 
 
-    contentIsLiked(contentHero, myListButton[0], contentType);
+    
+    heroMyListButtonContainer.innerHTML = "";
+    const myListButton = document.createElement('p');
+    myListButton.classList.add('my-list--button');
+    const myListText = 'My list';
+    const myListDisplayText = document.createTextNode(myListText);
+    
+    heroMyListButtonContainer.appendChild(myListButton);
+    heroMyListButtonContainer.appendChild(myListDisplayText);
+    
+    contentIsLiked(contentHero, myListButton, contentType);
 
-    myListButton[0].addEventListener('click', (event) => {
+    myListButton.addEventListener('click', (event) => {
         event.stopPropagation();
-        myListButton[0].classList.toggle('my-list--button--liked');
-        myListButton[0].classList.toggle('my-list--button');
-        likeContent(contentType, contentHero);
+        myListButton.classList.toggle('my-list--button--liked');
+        likeContent(contentHero, contentType);
     });
 
     getMovieDetails(contentType, contentHero.id)
@@ -215,15 +230,25 @@ const printContentPreview = async (contentType, contentId) => {
             contentInfoFeatures.appendChild(contentYearItem);
             contentInfoFeatures.appendChild(contentLastsItem);
 
-            contentIsLiked(content, myListButton[2], contentType);
+            
+            previewMyListButtonContainer.innerHTML = "";
+            const myListButton = document.createElement('button');
+            myListButton.classList.add('my-list--button');
+            const myListDisplay = document.createElement('p');
+            const myListText = 'My list'
+            const myListDisplayText = document.createTextNode(myListText);
+            
+            myListDisplay.appendChild(myListDisplayText);
+            previewMyListButtonContainer.appendChild(myListButton);
+            previewMyListButtonContainer.appendChild(myListDisplay);
+            
+            contentIsLiked(content, myListButton, contentType);
 
-            myListButton[2].addEventListener('click', (event) => {
+            myListButton.addEventListener('click', (event) => {
                 event.stopPropagation();
-                myListButton[2].classList.toggle('my-list--button--liked');
-                myListButton[2].classList.toggle('my-list--button');
-                likeContent(contentType, content);
-                console.log(content.id);
-                console.log(JSON.parse(localStorage.getItem('liked_movie')));
+                myListButton.classList.toggle('my-list--button--liked');
+                likeContent(content, contentType);
+                getContentHero(contentType);
             });
         })
 }
@@ -262,14 +287,18 @@ const printContentDetails = async (contentType, contentId) => {
             contentDetailsFeatures.appendChild(contentYearItem);
             contentDetailsFeatures.appendChild(contentLastsItem);
 
-            contentIsLiked(content, myListButton[1], contentType);
-
-            myListButton[1].addEventListener('click', (event) => {
+            
+            detailsMyListButtonContainer.innerHTML = "";
+            const myListButton = document.createElement('p');
+            myListButton.classList.add('my-list--button');
+            detailsMyListButtonContainer.appendChild(myListButton)
+            
+            contentIsLiked(content, myListButton, contentType);
+            
+            myListButton.addEventListener('click', (event) => {
                 event.stopPropagation();
-                myListButton[1].classList.toggle('my-list--button--liked');
-                myListButton[1].classList.toggle('my-list--button');
-                likeContent(contentType, content);
-                console.log(localStorage.getItem(`liked_${contentType}`));
+                myListButton.classList.toggle('my-list--button--liked');
+                likeContent(content, contentType);
             });
         });
     getMovieDetails(contentType, contentId, '/credits')
@@ -528,6 +557,15 @@ const getRandomGenre = async (contentTypeParameter) => {
 
 const getLikedContent = (contentType) => {
     myListScrollContainer.innerHTML = "";
-    let likedContent = Object.values(likedContentList(contentType));
-    printMyListHorizontalSection(likedContent, contentType)
+    if(contentType === 'both') {
+        let likedMovies = Object.values(likedContentList('movie'));
+        let likedSeries = Object.values(likedContentList('tv'));
+        printMyListHorizontalSection(likedMovies, 'movie')
+        printMyListHorizontalSection(likedSeries, 'tv')
+        console.log(contentType);
+    } else {
+        let likedContent = Object.values(likedContentList(contentType));
+        printMyListHorizontalSection(likedContent, contentType)
+        console.log(contentType);
+    }
 }

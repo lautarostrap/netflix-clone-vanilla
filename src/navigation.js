@@ -53,7 +53,7 @@ function homePage() {
 
     getContentHero();
 
-    getLikedContent('movie');
+    getLikedContent('both');
 
     getTopContentPreview('movie');
     getTopContentPreview('tv'); 
@@ -292,7 +292,11 @@ function moviesOrShowsPage() {
     setSectionName(sectionName);
 
     getContentHero(contentType);
-    
+
+    (contentType === 'tv')
+        ? getLikedContent('tv')
+        : getLikedContent('movie');    
+
     getTopContentPreview(contentType); 
     
     getRandomGenre(contentType)

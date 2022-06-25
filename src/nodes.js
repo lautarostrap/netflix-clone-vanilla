@@ -51,6 +51,10 @@ const contentInfoLasts = $('.info--lasts');
 
 const movieDescriptionContainer = $('.hero-movie__description-container')
 
+const detailsMyListButtonContainer = $('.button--my-list')
+const previewMyListButtonContainer = $('.buttons--list')
+const heroMyListButtonContainer = $('.buttons--my-list')
+
 // Elements
 
 const topTitle = $('.top-movies__title');
@@ -66,9 +70,9 @@ const seriesButton = selectorToString('.series--button');
 const moviesButton = selectorToString('.movies--button');
 const categoriesButton = selectorToString('.categories--button');
 const searchButton = selectorToString('.search--button');
-const myListButton = selectorToString('.my-list--button');
 const closeButton = $('.movie__close');
 const moreDetailsPreviewButton = $('.more__container p');
+
 
 const searchInput = $('.search--input');
 

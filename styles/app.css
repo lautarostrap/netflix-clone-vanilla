@@ -526,6 +526,12 @@ button {
     color: var(--soft-black);
     font-size: 10rem;
     font-weight: 700;
+    text-shadow: 
+        1.25px 1.25px 0 #cacaca, 
+        -1.25px -1.25px 0 #cacaca, 
+        1.25px -1.25px 0 #cacaca, 
+        -1.25px 1.25px 0 #cacaca,
+        -9px -1px 6px var(--soft-black);
 }
 
 .tops-movies__scroll-container .topContent--10 {
@@ -1160,7 +1166,7 @@ article .overview {
 .my-list--button::before {
     content: '+';
 }
-body .my-list--button--liked::after {
+body .my-list--button--liked::before {
     content: '✓';
     font-size: 2rem;
 }
