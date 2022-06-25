@@ -59,6 +59,11 @@ const likeContent = (content, contentType) => {
 
 // Utils
 
+const capitalizeFirstLetter = (string) => {
+    const capitalizedString = string[0].toUpperCase() + string.slice(1);
+    return capitalizedString;
+}
+
 const setSectionName = (sectionName) => {
     sectionTitle.innerHTML = sectionName;
     movieSerieModal.innerHTML = sectionName;
@@ -151,18 +156,24 @@ const printContentHero = async (contentHero, contentType) => {
         likeContent(contentHero, contentType);
     });
 
-    getMovieDetails(contentType, contentHero.id)
+    getMovieDetails(contentType, contentHero.id, '/keywords')
         .then(content => {
-            let contentGenre = content.genres;
+            let contentKeywords = 
+                (contentType == 'tv')
+                    ? content.results
+                    : content.keywords;
         
             movieDescriptionContainer.innerHTML = "";     
         
-            for (let categoryNumber = 0; categoryNumber < 3; categoryNumber++) {
-                const categoryTitleText = document.createTextNode(contentGenre[categoryNumber].name);
-                const categoryTitle = document.createElement('li');
+            for (let keywordNumber = 0; keywordNumber < 3; keywordNumber++) {
                 
-                categoryTitle.appendChild(categoryTitleText);
-                movieDescriptionContainer.appendChild(categoryTitle);
+                const keywordText = contentKeywords[keywordNumber].name
+                const keywordTitleCapitalizedText = capitalizeFirstLetter(keywordText)
+                const keywordTitleText = document.createTextNode(keywordTitleCapitalizedText);
+                const keywordTitle = document.createElement('li');
+                
+                keywordTitle.appendChild(keywordTitleText);
+                movieDescriptionContainer.appendChild(keywordTitle);
             }
         })
 
