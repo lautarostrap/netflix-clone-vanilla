@@ -326,9 +326,9 @@ const printContentDetails = async (contentType, contentId) => {
 }
 
 const printMyListHorizontalSection = async (contentInfo, contentType) => {
-        // (localStorage.getItem('liked_tv') === null && localStorage.getItem('liked_movie') === null)
-        //     ? myListContainer.classList.remove('inactive')
-        //     : myListContainer.classList.add('inactive');
+        (localStorage.getItem('liked_tv') == null && localStorage.getItem('liked_movie') == null)
+            ? myListContainer.classList.add('inactive')
+            : myListContainer.classList.remove('inactive');
 
         contentInfo.forEach(contentItem => {
             
