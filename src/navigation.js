@@ -9,6 +9,8 @@ window.addEventListener(
 window.addEventListener('hashchange', navigator, false);
 
 function navigator() {
+    location.hash === ''
+    ? profilesPage()     :
     location.hash.startsWith('#config')
     ? configPage()       :
     location.hash.startsWith('#search')
@@ -16,11 +18,11 @@ function navigator() {
     location.hash.startsWith('#movie=') || location.hash.startsWith('#tv=')
     ? movieDetailsPage() :
     location.hash.startsWith('#movies') || location.hash.startsWith('#tvs')
-    ? moviesOrShowsPage() :
-    location.hash.startsWith('#profiles')
-    ? profilesPage() :
+    ? moviesOrShowsPage():
     location.hash.startsWith('#category=')
     ? categoriesPage()   :
+    location.hash.startsWith('#home')
+    ? homePage() :
     homePage()
 
     document.body.scrollTop = 0;
@@ -127,6 +129,7 @@ function homePage() {
 }
 function profilesPage() {
     console.log('Profiles!')
+    printRAndMCharacters();
 
     profilesSection.classList.remove('inactive');
     detailSection.classList.add('inactive');
@@ -135,6 +138,7 @@ function profilesPage() {
     searchHeader.classList.add('inactive');
     genericVScrollContainer.classList.add('inactive');
     searchVScrollContainer.classList.add('inactive');
+    myListContainer.classList.add('inactive');
     profilesHeader.classList.remove('inactive');
     notFoundHeader.classList.add('inactive');
     movieDetailHeader.classList.add('inactive');
@@ -169,6 +173,8 @@ function configPage() {
     // topContainer.classList.add('inactive');
     notFoundContainer.classList.add('inactive');
     moviePreviewModal.classList.add('inactive');
+
+    printRAndMCharacters();
 }
 function searchPage() {
     console.log('Search!')
@@ -366,7 +372,7 @@ moreButton.forEach(button => button.addEventListener('click', () => {
 backButton.forEach(button => button.addEventListener('click', () => {
     if (document.domain !== 'localhost') {
         console.log(document.domain);
-        window.location.hash = '';
+        window.location.hash = '#home';
     } else {
         console.log('Debería sólo retroceder');
         window.history.back();

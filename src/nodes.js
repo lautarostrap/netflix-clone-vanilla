@@ -55,6 +55,14 @@ const detailsMyListButtonContainer = $('.button--my-list')
 const previewMyListButtonContainer = $('.buttons--list')
 const heroMyListButtonContainer = $('.buttons--my-list')
 
+const profileContainer = selectorToString('.main--profile')
+const profileImage = selectorToString('.main--profile div img')
+const profileName = selectorToString('.main--profile p')
+
+const profileContainerMore = selectorToString('.main--profile--more')
+const profileImageMore = selectorToString('.main--profile--more div img')
+const profileNameMore = selectorToString('.main--profile--more p')
+
 // Elements
 
 const topTitle = $('.top-movies__title');

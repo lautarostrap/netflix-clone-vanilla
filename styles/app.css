@@ -672,28 +672,45 @@ button {
 
 .more__main-container .main--profiles-container {
     display: flex;
+    height: 120x;
+    align-items: flex-start;
     justify-content: space-evenly;
 }
 
-.more__main-container .main--profiles-container img {
+.main--profiles-container img {
     height: 60px;
     width: 60px;
     border-radius: 4px;
     background-color: #fb7444;
     object-fit: cover;
-    margin-bottom: 6px;
+    margin-bottom: 16px;
 }
 
-.more__main-container .main--profile a {
-    text-decoration: none;
+.main--profiles-container li {
+    list-style: none;
     color: var(--white);
-    font-size: 1rem;
 }
 
-.main--profile a p {
+.main--profile--more {
+    margin-top: 10px;
+}
+
+.main--profile--more p {
     text-align: center;
     font-size: 0.9rem;
 }
+
+.more__main-container  .main--profile--selected {
+    margin-top: 0px;
+}
+
+.more__main-container  .main--profile--selected img {
+    height: 80px;
+    width: 80px;
+    margin-bottom: 6px;
+    border: 1px solid white;
+}
+
 
 .main--links-container .links__first {
     margin-top: 20px;
