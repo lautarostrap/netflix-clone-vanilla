@@ -102,6 +102,7 @@ button {
     width: 28px;
     border-radius: 4px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .link-container {
@@ -129,6 +130,7 @@ button {
     color: var(--white);
     font-size: 1.6rem;
     justify-self: center;
+    cursor: pointer;
 }
 
 .dropdown-icon {
@@ -175,6 +177,7 @@ button {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .header__right {
@@ -190,6 +193,7 @@ button {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .header--profile-container {
@@ -201,6 +205,7 @@ button {
     width: 28px;
     border-radius: 4px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 /* More */
@@ -220,6 +225,7 @@ button {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .header__more h2 {
@@ -261,6 +267,7 @@ button {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .header__movies-series .navbar-bottom {
@@ -321,6 +328,7 @@ button {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .header__search .navbar-bottom {
@@ -495,11 +503,13 @@ button {
 .movie__image {
     display: inline-block;
     margin-right: 8px;
+    
 }
 
 .top__image img, .movie__image img {
     width: 100px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 /* Top Content */
@@ -689,6 +699,11 @@ button {
 .main--profiles-container li {
     list-style: none;
     color: var(--white);
+    cursor: pointer;
+}
+
+.main--image-container img:hover{
+    border: 2px solid white;
 }
 
 .main--profile--more {
@@ -978,6 +993,7 @@ article .overview {
     height: 60px;
     width: 100%;
     background-color: var(--very-dark-grey);
+    cursor: pointer;
 }
 
 .search__content-item div {
@@ -1017,6 +1033,7 @@ article .overview {
 .searched-content__image {
     display: inline-block;
     margin-right: 8px;
+    cursor: pointer;
 }
 
 .searched-content__image img {
@@ -1108,6 +1125,7 @@ article .overview {
 .movie-preview__main-container .movie__close img {
     height: 12px;
     width: 12px;
+    cursor: pointer;
 }
 
 .movie-preview__main-container .buttons-container {
