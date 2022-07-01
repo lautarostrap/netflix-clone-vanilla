@@ -65,6 +65,8 @@ const profileNameMore = selectorToString('.main--profile--more p')
 
 // Elements
 
+const heroMovieLogo = $('.hero-movie__logo')
+
 const topTitle = $('.top-movies__title');
 const contentDetailsTitle = $('.movie__title');
 const contentDetailsDescription = $('.overview');

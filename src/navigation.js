@@ -8,7 +8,11 @@ window.addEventListener(
 );
 window.addEventListener('hashchange', navigator, false);
 
+let screenWidth = window.screen.width;
+
 function navigator() {
+    console.log('width: '+ screenWidth)
+
     location.hash === ''
     ? profilesPage()     :
     location.hash.startsWith('#config')

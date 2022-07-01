@@ -392,6 +392,10 @@ button {
         url('../assets/html-version/stranger-poster-v500.jpeg');
 }
 
+.hero-movie__logo {
+    display: none;
+}
+
 .hero-movie__content-container {
     position: absolute;
     width: 100%;
@@ -507,7 +511,8 @@ button {
 }
 
 .top__image img, .movie__image img {
-    width: 100px;
+    /* width: 100px; */
+    height: 150px;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -1320,4 +1325,145 @@ footer {
     color: var(--white);
     font-size: 0.9rem;
     margin-top: 4px;
+}
+
+@media (min-width: 426px) {
+    /* Hero Movie */
+
+    .hero-movie {
+        height: 85vh;
+        background-position: center;
+    }
+
+    .hero-movie__description-container {
+        display: none;
+    }
+
+    .hero-movie__buttons-container {
+        display: flex;
+        justify-content: flex-start;
+        gap: 12px;
+        margin-left: 36px;
+        margin-bottom: 5vw;
+    }
+
+    .hero-movie__logo {
+        display: block;
+        max-height: 85px;
+        max-width: 350px;
+        margin-left: 36px;
+        margin-bottom: 24px;
+    }
+
+    .hero-movie .buttons--play {
+        height: 76%;
+        width: 28vh;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .buttons__no-decoration {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        height: 76%;
+        width: 28vh;
+        font-size: 1.5rem;
+        font-weight: 600;
+        background-color: rgba(109, 109, 110, 0.7);
+        border-radius: 2px;
+    }
+
+    .hero-movie .buttons__no-decoration span {
+        margin: 0;
+        margin-right: 8px;
+    }
+    
+    .hero-movie .buttons--my-list {
+        display: none;
+    }
+
+    
+    /* Genre Container */
+
+    .movie__image img {
+        height: 125px;
+    }
+
+    /* Top Container */
+
+    .top__image {
+        /* position: relative;
+        display: inline-block;
+        height: 100%; */
+        width: 222.41px;
+        margin-left: 0;
+    }
+    /* 
+    .top__image img {
+        position: absolute;
+        right: 0;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    }
+    */
+    .top__image p {
+        bottom: -11px;
+        font-size: 19rem;
+        left: 26px;
+        /* font-family: 'Inter', sans-serif;
+        position: absolute;
+        color: var(--soft-black);
+        font-weight: 700;
+        text-shadow: 
+            1.25px 1.25px 0 #cacaca, 
+            -1.25px -1.25px 0 #cacaca, 
+            1.25px -1.25px 0 #cacaca, 
+            -1.25px 1.25px 0 #cacaca,
+            -9px -1px 6px var(--soft-black); */
+    } 
+
+    .top-movies__scroll-container .topContent--1 p {
+        z-index: 18;
+        left: 51px;
+    }
+    .topContent--2 p {
+        z-index: 16;
+    }
+    .topContent--3 p {
+        z-index: 14;
+    }
+    .topContent--4 p {
+        z-index: 12;
+    }
+    .topContent--5 p {
+        z-index: 10;
+    }
+    .topContent--6 p {
+        z-index: 8;
+    }
+    .topContent--7 p {
+        z-index: 6;
+    }
+    .topContent--8 p {
+        z-index: 4;
+    }
+    .topContent--9 p {
+        z-index: 2;
+    }
+    .top-movies__scroll-container .topContent--10 p {
+        z-index: 0;
+        font-size: 15rem;
+        bottom: 12px;
+        left: 9px;
+    }
+
+        /* Shared */
+
+    .my-list__main-container,
+    .genre-movies__main-container,
+    .top-movies__main-container {
+        margin-left: 36px;
+    }
 }

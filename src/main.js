@@ -12,6 +12,8 @@ const api = axios.create({
 
 const POSTER_300W_URL = 'https://image.tmdb.org/t/p/w300/';
 const POSTER_500W_URL = 'https://image.tmdb.org/t/p/w500/';
+const POSTER_780W_URL = 'https://image.tmdb.org/t/p/w780/';
+const POSTER_1280W_URL = 'https://image.tmdb.org/t/p/w1280/';
 
 const contentIsLiked = (content, button, contentType) => {
     let likedContent = likedContentList(contentType);
@@ -128,7 +130,10 @@ const printTopContentPosters = (movies, contentType) => {
 }
 
 const printContentHero = async (contentHero, contentType) => {
-    const contentImgUrl = `${POSTER_500W_URL}${contentHero.poster_path}`;
+    const contentImgUrl = 
+        (screenWidth <= 425)
+            ? `${POSTER_780W_URL}${contentHero.poster_path}`
+            : `${POSTER_1280W_URL}${contentHero.backdrop_path}`;
     heroContainer.style.backgroundImage =
     `linear-gradient(to bottom, 
         rgb(0, 0, 0, 0),
@@ -137,7 +142,10 @@ const printContentHero = async (contentHero, contentType) => {
         url(${contentImgUrl}`;
     heroContainer.addEventListener('click', () => {printContentPreview(contentType, contentHero.id)});
 
-
+    const contentTitle = 
+        (contentType == 'tv')
+            ? contentHero.name
+            : contentHero.title;
     
     heroMyListButtonContainer.innerHTML = "";
     const myListButton = document.createElement('p');
@@ -177,6 +185,20 @@ const printContentHero = async (contentHero, contentType) => {
             }
         })
 
+    getMovieDetails(contentType, contentHero.id, '/images')
+        .then(images => {
+            console.log(images);
+            const englishLogo = images.logos.find(logo => {
+                if(logo.iso_639_1 == "en")
+                return true;
+            })
+            console.log(englishLogo);
+
+            heroMovieLogo.setAttribute('alt', contentTitle)
+            heroMovieLogo.setAttribute('src', 
+                `${POSTER_500W_URL}${englishLogo.file_path}`
+            )
+        })
 }
 
 const printContentPreview = async (contentType, contentId) => {
@@ -342,19 +364,28 @@ const printMyListHorizontalSection = async (contentInfo, contentType) => {
             : myListContainer.classList.remove('inactive');
 
         contentInfo.forEach(contentItem => {
-            
-            const genericContentContainer = document.createElement('article');
-            genericContentContainer.classList.add('movie__image');
+            getMovieDetails(contentType, contentItem.id, '/images')
+                .then(images => {
+                    const englishBackdrop = images.backdrops.find(backdrop => {
+                        if(backdrop.iso_639_1 == "en")
+                        return true;
+                    })
+                    const genericContentContainer = document.createElement('article');
+                    genericContentContainer.classList.add('movie__image');
 
-            const movieImg = document.createElement('img');
-            movieImg.setAttribute('alt', contentItem.title);
-            movieImg.setAttribute('src',
-                `${POSTER_300W_URL}${contentItem.poster_path}`
-            );
-            movieImg.addEventListener('click', () => printContentPreview(contentType, contentItem.id));
+                    const contentImage = 
+                        (screenWidth <= 425)
+                            ? `${POSTER_500W_URL}${contentItem.poster_path}`
+                            : `${POSTER_500W_URL}${englishBackdrop.file_path}`;
 
-            genericContentContainer.appendChild(movieImg);
-            myListScrollContainer.appendChild(genericContentContainer);
+                    const movieImg = document.createElement('img');
+                    movieImg.setAttribute('alt', contentItem.title);
+                    movieImg.setAttribute('src', contentImage);
+                    movieImg.addEventListener('click', () => printContentPreview(contentType, contentItem.id));
+
+                    genericContentContainer.appendChild(movieImg);
+                    myListScrollContainer.appendChild(genericContentContainer);
+                })
         })
 }
 const printGenericHorizontalSection = async (
@@ -363,6 +394,7 @@ const printGenericHorizontalSection = async (
     sectionToInsert,
     contentInfo, 
     contentType) => {
+
         const genericHContainer = document.createElement('section');
         genericHContainer.classList.add(`${sectionClass}__main-container`);
         const genericHContainerTitle = document.createElement('h2');
@@ -385,22 +417,31 @@ const printGenericHorizontalSection = async (
         genericHScrollContainer.classList.add(`${sectionClass}__scroll-container`);
 
         contentInfo.forEach(contentItem => {
-            
-            const genericContentContainer = document.createElement('article');
-            genericContentContainer.classList.add('movie__image');
+            getMovieDetails(contentType, contentItem.id, '/images')
+                .then(images => {
+                    const englishBackdrop = images.backdrops.find(backdrop => {
+                        if(backdrop.iso_639_1 == "en")
+                        return true;
+                    })
+                
+                    const genericContentContainer = document.createElement('article');
+                    genericContentContainer.classList.add('movie__image');
 
-            const movieImg = document.createElement('img');
-            movieImg.setAttribute('alt', contentItem.title);
-            movieImg.setAttribute('src',
-                `${POSTER_300W_URL}${contentItem.poster_path}`
-            );
-            movieImg.addEventListener('click', () => printContentPreview(contentType, contentItem.id));
+                    const contentImage = 
+                        (screenWidth <= 425)
+                            ? `${POSTER_500W_URL}${contentItem.poster_path}`
+                            : `${POSTER_500W_URL}${englishBackdrop.file_path}`;
 
-            genericContentContainer.appendChild(movieImg);
-            genericHScrollContainer.appendChild(genericContentContainer);
-            genericHContainer.appendChild(genericHScrollContainer);
-            sectionToInsert.appendChild(genericHContainer);
-    
+                    const movieImg = document.createElement('img');
+                    movieImg.setAttribute('alt', contentItem.title);
+                    movieImg.setAttribute('src', contentImage);
+                    movieImg.addEventListener('click', () => printContentPreview(contentType, contentItem.id));
+
+                    genericContentContainer.appendChild(movieImg);
+                    genericHScrollContainer.appendChild(genericContentContainer);
+                    genericHContainer.appendChild(genericHScrollContainer);
+                    sectionToInsert.appendChild(genericHContainer);
+                })
         })
 }
 
