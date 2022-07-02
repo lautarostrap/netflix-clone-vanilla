@@ -766,9 +766,9 @@ button {
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 80px;
+    top: 100px;
     width: 100%;
-    height: 92vh;
+    height: 87vh;
 }
 
 .main--routes-container h1 {
@@ -782,14 +782,14 @@ button {
 
 .main--routes-container .main--profiles-container {
     display: grid;
-    grid-template-columns: 80px 80px;
-    grid-auto-rows: 120px;
-    column-gap: 16px;
+    grid-template-columns: 100px 100px;
+    grid-auto-rows: 140px;
+    column-gap: 20px;
     list-style: none;
 }
 
 .main--routes-container .main--profiles-container img {
-    height: 80px;
+    height: 100px;
     width: 100%;
     border-radius: 4px;
     /* background: linear-gradient(207.8deg, #fb7444 16.69%, #2c3b5b 100%); */
@@ -798,13 +798,13 @@ button {
     margin-bottom: 6px;
 }
 
-.main--routes-container .main--profile a {
+/* .main--routes-container .main--profile a {
     text-decoration: none;
     color: var(--white);
     font-size: 1rem;
-}
+} */
 
-.main--routes-container .main--profile a p {
+.main--routes-container .main--profile p {
     text-align: center;
 }
 
@@ -1328,11 +1328,72 @@ footer {
 }
 
 @media (min-width: 426px) {
+
+    html {
+        background-color: var(--soft-black);
+    }
+
+            /* Header */
+
+    /* Profile Selection */
+
+    .header__profile-selection {
+        justify-content: flex-start;
+        background: linear-gradient(to top, 
+            rgb(0, 0, 0, 0),
+            rgba(0, 0, 0, 0.100) 36%,
+            rgba(0, 0, 0));
+    }
+    
+    .header--image-container {
+        align-self: flex-start;
+        margin-left: 48px;
+    }
+    
+    .header__profile-selection img {
+        margin-top: 0;
+    }
+
+            /* Main */
+
+    /* Profile selection */
+
+    .main--routes-container {
+        top: 170px;
+    }
+
+    .main--routes-container h1 {
+        font-size: 5rem;
+         width: 500px;
+        /*margin-bottom: 20px;
+        color: var(--white); */
+        /* font-weight: 400;
+        text-align: center; */
+    }
+    
+    .main--routes-container .main--profiles-container {
+        grid-template-columns: repeat(5, 140px);
+        column-gap: 30px;
+    }
+    
+    .main--routes-container .main--profiles-container img {
+        height: 140px;
+    }
+
+    .main--routes-container .main--profile p {
+        font-size: 1.6rem;
+        color: var(--grey);
+    }
+
     /* Hero Movie */
 
     .hero-movie {
-        height: 85vh;
+        height: 100vh;
         background-position: center;
+    }
+
+    .hero-movie__content-container {
+        bottom: 110px;
     }
 
     .hero-movie__description-container {
@@ -1347,6 +1408,10 @@ footer {
         margin-bottom: 5vw;
     }
 
+    .hero-movie__buttons-container button {
+        border-radius: 6px;
+    }
+
     .hero-movie__logo {
         display: block;
         max-height: 85px;
@@ -1356,11 +1421,16 @@ footer {
     }
 
     .hero-movie .buttons--play {
-        height: 76%;
-        width: 28vh;
+        height: 86%;
+        width: 180px;
         font-size: 1.5rem;
         font-weight: 600;
         margin: 0;
+    }
+
+    .hero-movie .buttons--play span {
+        height: 16px;
+        width: 16px;
     }
     
     .buttons__no-decoration {
@@ -1368,8 +1438,8 @@ footer {
         align-items: center;
         justify-content: center;
         margin: 0;
-        height: 76%;
-        width: 28vh;
+        height: 86%;
+        width: 180px;
         font-size: 1.5rem;
         font-weight: 600;
         background-color: rgba(109, 109, 110, 0.7);
@@ -1395,33 +1465,20 @@ footer {
     /* Top Container */
 
     .top__image {
-        /* position: relative;
-        display: inline-block;
-        height: 100%; */
         width: 222.41px;
         margin-left: 0;
     }
-    /* 
-    .top__image img {
-        position: absolute;
-        right: 0;
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    }
-    */
+ 
     .top__image p {
         bottom: -11px;
         font-size: 19rem;
         left: 26px;
-        /* font-family: 'Inter', sans-serif;
-        position: absolute;
-        color: var(--soft-black);
-        font-weight: 700;
+        color: var(--black);
         text-shadow: 
-            1.25px 1.25px 0 #cacaca, 
-            -1.25px -1.25px 0 #cacaca, 
-            1.25px -1.25px 0 #cacaca, 
-            -1.25px 1.25px 0 #cacaca,
-            -9px -1px 6px var(--soft-black); */
+            3px 3px 0 #595959, 
+            -3px -3px 0 #595959, 
+            3px -3px 0 #595959, 
+            -3px 3px 0 #595959;
     } 
 
     .top-movies__scroll-container .topContent--1 p {

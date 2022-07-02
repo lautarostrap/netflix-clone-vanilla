@@ -549,7 +549,7 @@ const getContentHero = async (contentTypeParam) => {
     
     const randomPosterNumber =
         (contentType === 'movie')
-            ? getRandomNumber(11, 13)
+            ? getRandomNumber(12, 13)
             : getRandomNumber(4, 6);
 
     const { data } = await api(`/discover/${contentType}`, {
