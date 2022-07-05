@@ -68,7 +68,7 @@ const capitalizeFirstLetter = (string) => {
 
 const setSectionName = (sectionName) => {
     sectionTitle.innerHTML = sectionName;
-    movieSerieModal.innerHTML = sectionName;
+    movieSerieModalButton.innerHTML = sectionName;
 }
 
 const getMovieRuntime = (runtimeParameter) => {
@@ -205,7 +205,7 @@ const printContentPreview = async (contentType, contentId) => {
     getMovieDetails(contentType, contentId)
         .then(content => {
 
-            moviePreviewModal.classList.remove('inactive');
+            toggleModal(moviePreviewModal);
             moviePreviewModal.addEventListener('click', () => {
                 location.hash = `#${contentType}=${content.id}`;
             });
@@ -514,6 +514,67 @@ const printTopSearchContent = async (contentType, content) => {
 
 }
 
+const printGenreList = async (contentType) => {
+    if(!contentType) {
+        getGenreList('movie')
+            .then(genresArray => {
+                categoriesModalContainer.innerHTML = "";
+
+                const categoriesModalTitle = document.createElement('h2');
+                const categoriesModalTitleText = document.createTextNode('Home');
+                categoriesModalTitle.appendChild(categoriesModalTitleText);
+                categoriesModalContainer.appendChild(categoriesModalTitle);
+
+                const categoriesModalMyList = document.createElement('li');
+                const categoriesModalMyListText = document.createTextNode('My list');
+                categoriesModalMyList.appendChild(categoriesModalMyListText);
+                categoriesModalContainer.appendChild(categoriesModalMyList);
+                
+                genresArray.forEach(genre => {
+                    const genreElement = document.createElement('li');
+                    const genreName = document.createTextNode(genre.name);
+                    genreElement.appendChild(genreName);
+                    categoriesModalContainer.appendChild(genreElement);
+
+                    categoriesModalTitle.addEventListener('click', () => {
+                        toggleModal(categoriesModal);
+                    })
+
+                    genreElement.addEventListener('click', () => {
+                        location.hash = `#category-movie=${genre.id}-${genre.name}`;
+                        toggleModal(categoriesModal);
+                    })
+                })
+            })
+    } else {
+        getGenreList(contentType)
+            .then(genresArray => {
+                categoriesModalContainer.innerHTML = "";
+
+                const categoriesModalTitle = document.createElement('h2');
+                const categoriesModalTitleText = document.createTextNode('All categories');
+                categoriesModalTitle.appendChild(categoriesModalTitleText);
+                categoriesModalContainer.appendChild(categoriesModalTitle);
+
+                categoriesModalTitle.addEventListener('click', () => {
+                    toggleModal(categoriesModal);
+                })
+
+                genresArray.forEach(genre => {
+                    const genreElement = document.createElement('li');
+                    const genreName = document.createTextNode(genre.name);
+                    genreElement.appendChild(genreName);
+                    categoriesModalContainer.appendChild(genreElement);
+
+                    genreElement.addEventListener('click', () => {
+                        location.hash = `#category-${contentType}=${genre.id}-${genre.name}`;
+                        toggleModal(categoriesModal);
+                    })
+                })
+            })
+    }
+}
+
 // API
 
 const getMovieDetails = async (contentType, contentId, extraInfo) => {
@@ -564,6 +625,18 @@ const getContentHero = async (contentTypeParam) => {
     printContentHero(contentHero, contentType);
 }
 
+const getContentWithFilters = async (contentType, filters) => {
+    try {
+        const { data } = await api(`/discover/${contentType}`, {
+                params: filters,
+            })
+        return new Promise((resolve) => {resolve(data.results)});
+    }
+    catch (err) {
+        console.error(err);
+    }
+}
+
 const getSectionContent = async (contentType, genreId, filter) => {
     try {
         const { data } = await api(`/discover/${contentType}`, {
@@ -601,6 +674,16 @@ const getRandomGenre = async (contentTypeParameter) => {
         const { data } = await api(`/genre/${randomContentType}/list`);
         const randomGenreIndex = getRandomNumber(1, data.genres.length);
         return new Promise((resolve) => {resolve(data.genres[randomGenreIndex])});
+     }
+     catch (err) {
+         console.error(err);
+     }
+}
+
+const getGenreList = async (contentType) => {
+    try {
+        const { data } = await api(`/genre/${contentType}/list`);
+        return new Promise((resolve) => {resolve(data.genres)});
      }
      catch (err) {
          console.error(err);

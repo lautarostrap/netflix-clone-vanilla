@@ -42,7 +42,7 @@ button {
 /* Profile Selection */
 
 .header__profile-selection {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1275,20 +1275,51 @@ body .my-list--button--liked::before {
     z-index: 30;
     position: fixed;
     top: 0;
-    background-color: black;
+    background: rgba(0,0,0,.95);
 }
 
 .categories-modal__main-container h2 {
     margin-top: 100px;
     margin-bottom: 20px;
     font-size: 2.3rem;
+    text-align: center;
 }
 
+.categories-modal__main-container ul {
+    overflow-y: scroll;
+    width: 100vw;
+    padding-bottom: 64px;
+}
 .categories-modal__main-container ul li {
     font-size: 1.6rem;
     list-style: none;
     text-align: center;
     margin-bottom: 16px;
+}
+
+.categories-modal__main-container div {
+    width: 100%;
+    height: 64px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to bottom, 
+        rgb(0, 0, 0, 0) 1%,
+        rgba(0, 0, 0, 0.500) 24%,
+        rgba(0, 0, 0, 1) 100%);
+}
+.categories-modal__main-container button {
+    height: 52px;
+    width: 52px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--white);
+    transform: rotate(0.125turn);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 4rem;
+    font-weight: 300;
+    margin: 0 auto;
 }
 
     /* Footer */

@@ -23,7 +23,7 @@ function navigator() {
     ? movieDetailsPage() :
     location.hash.startsWith('#movies') || location.hash.startsWith('#tvs')
     ? moviesOrShowsPage():
-    location.hash.startsWith('#category=')
+    location.hash.startsWith('#category-')
     ? categoriesPage()   :
     location.hash.startsWith('#home')
     ? homePage() :
@@ -234,6 +234,8 @@ function searchPage() {
                 })
         })
     }
+    searchVScrollContainerTitle.innerHTML = "Top search";
+    searchVScrollContainer.style.marginTop = "108px";
 }
 function movieDetailsPage() {
     console.log('Details!')
@@ -264,6 +266,63 @@ function movieDetailsPage() {
 }
 function categoriesPage() {
     console.log('Categories!')
+
+    profilesSection.classList.add('inactive');
+    detailSection.classList.add('inactive');
+    configSection.classList.add('inactive');
+    homeHeader.classList.add('inactive');
+    searchHeader.classList.add('inactive');
+    genericVScrollContainer.classList.add('inactive');
+    searchVScrollContainer.classList.remove('inactive');
+    myListContainer.classList.add('inactive');
+    profilesHeader.classList.add('inactive');
+    notFoundHeader.classList.add('inactive');
+    movieDetailHeader.classList.add('inactive');
+    configHeader.classList.add('inactive');
+    moviesSeriesHeader.classList.remove('inactive');
+    footer.classList.add('inactive');
+    heroContainer.classList.remove('inactive');
+    genreContainer.classList.remove('inactive');
+    // topContainer.classList.remove('inactive');
+    notFoundContainer.classList.add('inactive');
+    moviePreviewModal.classList.add('inactive');
+
+    genericVScrollContainer.innerHTML = "";
+
+    const [_, contentAndCategoryId, rawCategoryTitle] = location.hash.split('-');
+    const [contentType, categoryId] = contentAndCategoryId.split('=');
+    const categoryTitle = decodeURI(rawCategoryTitle);
+
+    const contentTypeName =
+        (contentType === 'tv')
+            ? 'Tv shows'
+            : 'Movies';
+
+    getContentWithFilters(
+        contentType,
+        {
+            with_genres: categoryId,
+            sort_by: 'popularity.desc',
+        }
+    ).then(contentArray => {
+        printContentHero(contentArray[0], contentType);
+        })
+
+    getContentWithFilters(
+        contentType,
+        {
+            with_genres: categoryId,
+        }
+    ).then(contentArray => {
+        printGenericVerticalSection(contentType, contentArray);
+        })
+
+    searchVScrollContainerTitle.innerHTML = `Best ${categoryTitle} ${contentTypeName}`
+    searchVScrollContainer.style.marginTop = 0;
+
+    movieSerieModalButton.innerHTML = contentTypeName;
+    setSectionName(contentTypeName);
+    categoriesMovieSerieButtonText.innerHTML = categoryTitle;
 }
 function moviesOrShowsPage() {
     console.log('movies/shows!')
@@ -287,7 +346,7 @@ function moviesOrShowsPage() {
     notFoundContainer.classList.add('inactive');
     moviePreviewModal.classList.add('inactive');
 
-    
+    categoriesMovieSerieButtonText.innerHTML = 'All categories';
     genericVScrollContainer.innerHTML = "";
     
     const contentTypeRaw = location.hash;
@@ -353,8 +412,12 @@ function moviesOrShowsPage() {
     // Buttons
 // Functions
 
-const toggleInactive = (node) => {
+const toggleModal = (node) => {
     node.classList.toggle('inactive');
+
+    (!node.classList.contains('inactive'))
+        ? body.style.overflow = "hidden"
+        : body.style.overflow = "auto";
 }
 
 //Listeners
@@ -394,10 +457,33 @@ searchButton.forEach(button => button.addEventListener('click', () => {
 
 closeButton.addEventListener('click', (event) => {
     event.stopPropagation();
-    toggleInactive(moviePreviewModal)
+    toggleModal(moviePreviewModal);
 });
 
 searchInput.addEventListener('input', (event) => {
     location.hash = '#search=' + event.target.value;
 });
 
+categoriesHomeButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    toggleModal(categoriesModal);
+    printGenreList()
+})
+categoriesMovieSerieButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    toggleModal(categoriesModal);
+
+    const hash = location.hash;
+    if (hash.length < 8) {
+        const hashLength = hash.length;
+        const contentType = location.hash.slice(1, hashLength -1);
+        printGenreList(contentType);
+    } else {
+        const [_, contentAndCategoryId] = location.hash.split('-');
+        const [contentType, categoryId] = contentAndCategoryId.split('=');
+        printGenreList(contentType);
+    }
+
+})
+
+movieSerieModalClose.addEventListener('click', () => toggleModal(categoriesModal));

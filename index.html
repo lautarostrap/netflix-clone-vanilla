@@ -89,8 +89,8 @@
                     <button class="modal--movie-serie text-shadow--black">Movies</button>
                     <span class="dropdown-icon"></span>
                 </div>
-                <div>
-                    <button class="modal--categories text-shadow--white">All categories</button>
+                <div class="modal--categories">
+                    <button class="text-shadow--white">All categories</button>
                     <span class="dropdown-icon"></span>
                 </div>
             </div>
@@ -535,10 +535,10 @@
     </article>
 
     <section class="categories-modal__main-container inactive">
-        <h2>All categories</h2>
         <ul>
-            <li>Action</li>
-            <li>Comedy</li>
+            <h2 class="categories-modal--title">All categories</h2>
+            <li class="categories-modal--my-list">My list</li>
+            <!-- <li>Comedy</li>
             <li>Fantasy</li>
             <li>Adventure</li>
             <li>Drama</li>
@@ -551,9 +551,11 @@
             <li>Comedy</li>
             <li>Fantasy</li>
             <li>Adventure</li>
-            <li>Drama</li>
+            <li>Drama</li> -->
         </ul>
-        <button></button>
+        <div>
+            <button>+</button>
+        </div>
     </section>
 
     <footer class="footer inactive">

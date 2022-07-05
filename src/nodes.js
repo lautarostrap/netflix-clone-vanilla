@@ -5,6 +5,10 @@ const selectorToString = (selector) => {
     return stringedSelector;
 }
 
+// Universal
+
+const body = $('body');
+
 // Sections
 
 const profilesSection = $('.main--routes-container'); 
@@ -63,6 +67,8 @@ const profileContainerMore = selectorToString('.main--profile--more')
 const profileImageMore = selectorToString('.main--profile--more div img')
 const profileNameMore = selectorToString('.main--profile--more p')
 
+const categoriesModalContainer = $('.categories-modal__main-container ul');
+
 // Elements
 
 const heroMovieLogo = $('.hero-movie__logo')
@@ -78,11 +84,16 @@ const moreButton = selectorToString('.profile__more-button');
 const backButton = selectorToString('.back--button');
 const seriesButton = selectorToString('.series--button');
 const moviesButton = selectorToString('.movies--button');
-const categoriesButton = selectorToString('.categories--button');
 const searchButton = selectorToString('.search--button');
+const categoriesHomeButton = $('.categories--button');
+const categoriesMovieSerieButton = $('.modal--categories')
 const closeButton = $('.movie__close');
 const moreDetailsPreviewButton = $('.more__container p');
+const movieSerieModalButton = $('.modal--movie-serie')
+const movieSerieModalClose = $('.categories-modal__main-container div button')
 
+const searchVScrollContainerTitle = $('.search__vScrollContainer h2');
+const categoriesMovieSerieButtonText = $('.modal--categories button')
 
 const searchInput = $('.search--input');
 
@@ -91,4 +102,4 @@ const sectionTitle = $('.navbar-left h2');
 // Modals
 
 const moviePreviewModal = $('.movie-preview__main-container')
-const movieSerieModal = $('.modal--movie-serie')
+const categoriesModal = $('.categories-modal__main-container')
